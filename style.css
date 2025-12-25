@@ -5,123 +5,120 @@
   box-sizing: border-box;
 }
 
-/* ===== BACKGROUND ===== */
+/* ===== PAGE BACKGROUND ===== */
 body {
   min-height: 100vh;
-  font-family: "Segoe UI", monospace;
-  background: radial-gradient(circle at top, #00ffe7, transparent 35%),
-              linear-gradient(135deg, #020617, #020617);
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #020617);
   display: flex;
   justify-content: center;
   align-items: center;
   color: #e5e7eb;
 }
 
-/* ===== MAIN CYBER PANEL ===== */
+/* ===== MAIN CARD ===== */
 .container {
   width: 100%;
-  max-width: 430px;
-  background: rgba(10, 15, 30, 0.9);
-  border-radius: 18px;
-  padding: 22px;
-  border: 1px solid rgba(0,255,231,0.3);
-  box-shadow: 0 0 25px rgba(0,255,231,0.25);
+  max-width: 420px;
+  background: #ffffff;
+  color: #111827;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
 }
 
 /* ===== BRAND ===== */
 .brand {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .brand h1 {
-  color: #00ffe7;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(0,255,231,0.8);
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: #2563eb;
 }
 
 .subtitle {
-  font-size: 12px;
-  color: #9ca3af;
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
 }
 
-/* ===== SECTIONS ===== */
+/* ===== SECTION ===== */
 .section {
-  background: rgba(2, 6, 23, 0.8);
-  border: 1px solid rgba(0,255,231,0.2);
-  border-radius: 14px;
+  background: #f9fafb;
+  border-radius: 12px;
   padding: 14px;
   margin-top: 16px;
-  box-shadow: inset 0 0 10px rgba(0,255,231,0.15);
+  border: 1px solid #e5e7eb;
 }
 
 .section h3 {
   font-size: 14px;
-  color: #00ffe7;
   margin-bottom: 6px;
+  color: #2563eb;
 }
 
 /* ===== TEXT ===== */
 p, li {
-  font-size: 13px;
-  color: #d1d5db;
+  font-size: 14px;
+  color: #374151;
 }
 
 ul {
   padding-left: 18px;
 }
 
-/* ===== INPUTS ===== */
-input, select {
-  width: 100%;
-  margin-top: 6px;
-  padding: 10px;
-  border-radius: 10px;
-  background: #020617;
-  color: #00ffe7;
-  border: 1px solid rgba(0,255,231,0.3);
-  font-family: monospace;
+/* ===== FORM ===== */
+label {
+  font-size: 13px;
+  margin-top: 12px;
+  display: block;
+  color: #374151;
 }
 
-/* ===== BUTTONS ===== */
+input, select {
+  width: 100%;
+  padding: 11px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+/* ===== BUTTON ===== */
 button {
   width: 100%;
-  margin-top: 16px;
-  padding: 12px;
-  border-radius: 14px;
+  margin-top: 18px;
+  padding: 13px;
+  border-radius: 12px;
   border: none;
-  font-weight: bold;
-  letter-spacing: 1px;
-  background: linear-gradient(135deg, #00ffe7, #0ea5e9);
-  color: #020617;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 button:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 20px rgba(0,255,231,0.8);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(37,99,235,0.35);
 }
 
-/* ===== SECONDARY ===== */
+/* ===== PDF BUTTON ===== */
 .pdf-btn {
-  background: linear-gradient(135deg, #22c55e, #4ade80);
+  background: linear-gradient(135deg, #16a34a, #22c55e);
 }
 
-/* ===== LINKS ===== */
+/* ===== LINK ===== */
 a {
   display: block;
   text-align: center;
-  margin-top: 18px;
-  color: #00ffe7;
+  margin-top: 16px;
+  color: #2563eb;
   text-decoration: none;
-  font-size: 13px;
-}
-
-/* ===== TERMINAL EFFECT ===== */
-.terminal {
-  font-family: monospace;
-  font-size: 12px;
-  color: #00ffe7;
-  opacity: 0.8;
+  font-weight: 600;
 }
