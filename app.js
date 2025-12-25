@@ -1,8 +1,16 @@
-// ---------- SAFETY: FORCE POPUP HIDDEN ON LOAD ----------
+// ===============================
+// HARD RESET POPUP ON PAGE LOAD
+// ===============================
 const popup = document.getElementById("premiumPopup");
-popup.classList.add("hidden"); // HARD LOCK
 
-// ---------- TAB SWITCH ----------
+// Force hide popup always on load
+window.addEventListener("load", () => {
+  popup.classList.add("hidden");
+});
+
+// ===============================
+// TAB SWITCHING
+// ===============================
 document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -14,12 +22,16 @@ document.querySelectorAll(".tab").forEach(tab => {
   });
 });
 
-// ---------- USER DATA ----------
+// ===============================
+// USER DATA
+// ===============================
 const weight = Number(localStorage.getItem("weight")) || 70;
-const level = localStorage.getItem("level") || "beginner";
-const place = localStorage.getItem("place") || "home";
+const level  = localStorage.getItem("level") || "beginner";
+const place  = localStorage.getItem("place") || "home";
 
-// ---------- WORKOUT ----------
+// ===============================
+// WORKOUT LOGIC
+// ===============================
 const workouts = {
   beginner: {
     home: ["Push-ups 3×15", "Squats 3×20", "Plank 60s"],
@@ -40,7 +52,9 @@ if (workoutList) {
   });
 }
 
-// ---------- DIET ----------
+// ===============================
+// DIET LOGIC
+// ===============================
 const dietList = document.getElementById("dietList");
 if (dietList) {
   [
@@ -56,18 +70,19 @@ if (dietList) {
   });
 }
 
-// ---------- PREMIUM POPUP (ONLY ON CLICK) ----------
+// ===============================
+// PREMIUM POPUP (CLICK ONLY)
+// ===============================
 document.querySelectorAll(".premium-btn").forEach(btn => {
   btn.addEventListener("click", (e) => {
-    e.preventDefault();
+    e.preventDefault();     // 🔴 VERY IMPORTANT
     popup.classList.remove("hidden");
   });
 });
 
-// ---------- CLOSE POPUP ----------
+// ===============================
+// CLOSE POPUP
+// ===============================
 document.getElementById("closePopup").addEventListener("click", () => {
   popup.classList.add("hidden");
 });
-.hidden {
-  display: none !important;
-}
