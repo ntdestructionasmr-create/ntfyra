@@ -39,7 +39,54 @@
       localStorage.setItem("weight", document.getElementById("weight").value);
       localStorage.setItem("height", document.getElementById("height").value);
       localStorage.setItem("goal", document.getElementById("goal").value);
-      localStorage.setItem("workout", document.getElementById("workout").value);
+      localStorage.setItem("workout", document.getElementById("workout").value);<script>
+  const weeklyPlan = document.getElementById("weeklyPlan");
+
+  let plan = [];
+
+  if (workout === "home") {
+    plan = [
+      "Mon – Chest & Arms (Home)",
+      "Tue – Legs & Core (Home)",
+      "Wed – Rest / Stretching",
+      "Thu – Back & Shoulders (Home)",
+      "Fri – Full Body (Home)",
+      "Sat – Yoga / Cardio",
+      "Sun – Rest"
+    ];
+  }
+
+  if (workout === "gym") {
+    plan = [
+      "Mon – Chest & Triceps (Gym)",
+      "Tue – Back & Biceps (Gym)",
+      "Wed – Legs (Gym)",
+      "Thu – Shoulders & Abs",
+      "Fri – Full Body",
+      "Sat – Cardio / Yoga",
+      "Sun – Rest"
+    ];
+  }
+
+  if (workout === "both") {
+    plan = [
+      "Mon – Gym: Chest",
+      "Tue – Home: Legs",
+      "Wed – Rest / Stretching",
+      "Thu – Gym: Back",
+      "Fri – Home: Full Body",
+      "Sat – Yoga / Cardio",
+      "Sun – Rest"
+    ];
+  }
+
+  plan.forEach(day => {
+    const li = document.createElement("li");
+    li.innerText = day;
+    weeklyPlan.appendChild(li);
+  });
+</script>
+
     }
   </script>
 
