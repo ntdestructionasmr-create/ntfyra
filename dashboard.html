@@ -16,32 +16,26 @@
       border-radius: 12px;
       background: #f0f0f0;
       cursor: pointer;
+      font-size: 14px;
     }
     .tab.active {
       background: #00c853;
       color: white;
     }
-    .section {
-      display: none;
-    }
-    .section.active {
-      display: block;
-    }
+    .section { display: none; }
+    .section.active { display: block; }
     .box {
       background: #f1f3f6;
       padding: 12px;
       border-radius: 10px;
       margin-bottom: 16px;
     }
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
 
 <div class="container">
-
   <h1>Dashboard</h1>
 
   <!-- TABS -->
@@ -53,7 +47,6 @@
 
   <!-- USER TAB -->
   <div id="user" class="section active">
-
     <div class="box">
       <label>Height (cm)</label>
       <input type="number" id="height">
@@ -74,7 +67,6 @@
         <option value="gym">Gym</option>
       </select>
 
-      <!-- GYM LEVEL -->
       <div id="gymBox" class="hidden">
         <label>Gym Level</label>
         <select id="gymLevel">
@@ -83,32 +75,29 @@
         </select>
       </div>
 
-      <button onclick="saveUser()">Save Details</button>
+      <button onclick="generatePlans()">Save & Generate</button>
     </div>
-
   </div>
 
   <!-- DIET TAB -->
   <div id="diet" class="section">
     <div class="box" id="dietContent">
-      <p>Fill user details to generate diet.</p>
+      <p>Enter user details to generate diet.</p>
     </div>
   </div>
 
   <!-- WORKOUT TAB -->
   <div id="workout" class="section">
     <div class="box" id="workoutContent">
-      <p>Fill user details to generate workout.</p>
+      <p>Enter user details to generate workout.</p>
     </div>
   </div>
-
 </div>
 
 <script>
   function openTab(tabId, btn) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-
     btn.classList.add('active');
     document.getElementById(tabId).classList.add('active');
   }
@@ -120,42 +109,59 @@
       gymBox.classList.add("hidden");
   }
 
-  function saveUser() {
-    const weight = Number(weightInput.value = document.getElementById("weight").value);
+  function generatePlans() {
+    const weight = Number(document.getElementById("weight").value);
     const diet = document.getElementById("dietType").value;
     const workout = document.getElementById("workoutType").value;
     const level = document.getElementById("gymLevel").value;
 
-    /* -------- DIET LOGIC -------- */
+    /* -------- DIET+ (GRAMS) -------- */
     const calories = diet === "nonveg" ? weight * 33 : weight * 30;
+    const protein = diet === "nonveg" ? weight * 2 : weight * 1.6;
 
     document.getElementById("dietContent").innerHTML = `
-      <b>Calories:</b> ${calories} kcal<br><br>
-      <b>Breakfast:</b> Oats 60g + Eggs 3<br>
-      <b>Lunch:</b> Rice 150g + ${diet === "nonveg" ? "Chicken 150g" : "Paneer 120g"}<br>
-      <b>Snack:</b> Banana 120g + Peanuts 30g<br>
-      <b>Dinner:</b> Chapati 2 + ${diet === "nonveg" ? "Eggs 3" : "Paneer 100g"}
+      <b>Calories:</b> ${calories} kcal<br>
+      <b>Protein:</b> ${protein} g<br><br>
+
+      <b>Breakfast</b><br>
+      Oats – 60 g<br>
+      ${diet === "nonveg" ? "Eggs – 3 (180 g)" : "Paneer – 120 g"}<br><br>
+
+      <b>Lunch</b><br>
+      Rice – 150 g<br>
+      ${diet === "nonveg" ? "Chicken – 150 g" : "Paneer – 150 g"}<br><br>
+
+      <b>Snack</b><br>
+      Banana – 120 g<br>
+      Peanuts – 30 g<br><br>
+
+      <b>Dinner</b><br>
+      Chapati – 2 (80 g flour)<br>
+      ${diet === "nonveg" ? "Eggs – 3" : "Paneer – 100 g"}
     `;
 
-    /* -------- WORKOUT LOGIC -------- */
+    /* -------- WORKOUT+ (LEVEL BASED) -------- */
     let workoutPlan = "";
 
     if (workout === "home") {
       workoutPlan = `
-        Pushups – 3×10<br>
-        Squats – 3×12<br>
+        <b>Home Workout</b><br>
+        Pushups – 3×12<br>
+        Squats – 3×15<br>
         Plank – 30 sec<br>
-        Jumping Jacks – 3×20
+        Jumping Jacks – 3×25
       `;
     } else {
       workoutPlan = level === "beginner"
         ? `
+          <b>Gym – Beginner</b><br>
           Bench Press – 3×8<br>
           Lat Pulldown – 3×10<br>
-          Leg Press – 3×10<br>
-          Shoulder Press – 3×8
+          Leg Press – 3×12<br>
+          Shoulder Press – 3×10
         `
         : `
+          <b>Gym – Advanced</b><br>
           Bench Press – 4×8<br>
           Pull-ups – 4×8<br>
           Squats – 4×6<br>
@@ -169,7 +175,7 @@
       ${workoutPlan}
     `;
 
-    alert("Saved! Check Diet & Workouts tabs.");
+    alert("Plans generated! Check Diet & Workouts tabs.");
   }
 </script>
 
