@@ -1,108 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NTFYRA Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Dashboard</title>
 </head>
 <body>
 
-<div class="container">
-  <h1>Your Fitness Plan 🔥</h1>
-  <p>Structured • Balanced • Sustainable</p>
+<h2>Your Fitness Plan</h2>
 
-  <!-- WORKOUT PLAN -->
-  <div class="section">
-    <h3>🏋️ Weekly Workout Plan</h3>
-    <ul id="workoutPlan"></ul>
-  </div>
+<!-- WORKOUT -->
+<h3>Workout Plan</h3>
+<ul id="workoutPlan"></ul>
 
-  <!-- CARDIO -->
-  <div class="section">
-    <h3>❤️ Cardio</h3>
-    <p>2–3 sessions / week (Walking, Cycling, Skipping)</p>
-  </div>
-
-  <!-- DIET -->
-  <div class="section">
-    <h3>🍽️ Diet Plan</h3>
-    <table class="diet-table">
-      <tr><th>Meal</th><th>Food</th></tr>
-      <tr><td>Breakfast</td><td>Eggs / Paneer + Chapati</td></tr>
-      <tr><td>Lunch</td><td>Rice + Dal / Chicken + Veg</td></tr>
-      <tr><td>Snack</td><td>Banana + Peanuts</td></tr>
-      <tr><td>Dinner</td><td>Chapati + Eggs / Paneer</td></tr>
-    </table>
-    <p id="macro"></p>
-  </div>
-
-  <!-- YOGA -->
-  <div class="section">
-    <h3>🧘 Recovery & Mobility</h3>
-    <p>Yoga + stretching on rest days (10–15 min)</p>
-  </div>
-
-  <a href="index.html">⬅ Back to Home</a>
-</div>
+<!-- DIET -->
+<h3>Diet Plan</h3>
+<p id="dietPlan"></p>
 
 <script>
-const weight = localStorage.getItem("weight");
+/* ===== GET USER DATA ===== */
+const height = parseFloat(localStorage.getItem("height"));
+const weight = parseFloat(localStorage.getItem("weight"));
 const goal = localStorage.getItem("goal");
 const workout = localStorage.getItem("workout");
 const level = localStorage.getItem("level");
-const days = localStorage.getItem("days");
 
-/* ===== CALORIES ===== */
-let calories = 0;
+/* ===== DIET CALCULATION ===== */
+const heightM = height / 100;
+const bmi = (weight / (heightM * heightM)).toFixed(1);
+
+let calories = weight * 22;
+if(goal === "gain") calories += 500;
+if(goal === "muscle") calories += 300;
+
 let protein = 0;
+if(goal === "gain") protein = (weight * 1.6).toFixed(0);
+if(goal === "muscle") protein = (weight * 2).toFixed(0);
+if(goal === "maintain") protein = (weight * 1.5).toFixed(0);
 
-if (goal === "gain") { calories = weight * 38; protein = weight * 1.6; }
-if (goal === "muscle") { calories = weight * 33; protein = weight * 2; }
-if (goal === "maintain") { calories = weight * 29; protein = weight * 1.5; }
+document.getElementById("dietPlan").innerHTML = `
+<b>BMI:</b> ${bmi}<br>
+<b>Calories:</b> ${calories} kcal<br>
+<b>Protein:</b> ${protein} g<br><br>
 
-document.getElementById("macro").innerHTML =
-  `<b>Calories:</b> ${calories} kcal | <b>Protein:</b> ${protein} g`;
+<b>Breakfast:</b> Eggs / Paneer + Chapati<br>
+<b>Lunch:</b> Rice + Dal / Chicken<br>
+<b>Snack:</b> Banana + Peanuts<br>
+<b>Dinner:</b> Chapati + Eggs / Paneer
+`;
 
 /* ===== WORKOUT LOGIC ===== */
-let plan = [];
+let workouts = [];
 
-if (workout === "home") {
-  plan = [
-    "Day 1 – Push-ups, Squats",
-    "Day 2 – Core & Abs",
-    "Day 3 – Full Body",
-    "Day 4 – Rest / Yoga",
-    "Day 5 – Legs",
-    "Day 6 – Cardio",
-    "Day 7 – Rest"
-  ];
+if(workout === "gym"){
+  if(level === "beginner"){
+    workouts = [
+      "Chest – Machine Bench Press",
+      "Chest – Dumbbell Press",
+      "Back – Lat Pulldown",
+      "Legs – Leg Press",
+      "Arms – Cable Pushdown"
+    ];
+  } else {
+    workouts = [
+      "Chest – Barbell Bench Press",
+      "Back – Pull-ups / Barbell Row",
+      "Legs – Squats",
+      "Shoulders – Overhead Press",
+      "Arms – Barbell Curls & Dips"
+    ];
+  }
 }
 
-if (workout === "gym") {
-  plan = [
-    "Day 1 – Chest",
-    "Day 2 – Back",
-    "Day 3 – Legs",
-    "Day 4 – Shoulders",
-    "Day 5 – Arms",
-    "Day 6 – Cardio",
-    "Day 7 – Rest"
-  ];
-}
-
-if (workout === "both") {
-  plan = [
-    "Day 1 – Home Upper Body",
-    "Day 2 – Gym Chest",
-    "Day 3 – Yoga / Mobility",
-    "Day 4 – Gym Legs",
-    "Day 5 – Home Core",
-    "Day 6 – Cardio",
-    "Day 7 – Rest"
-  ];
+if(workout === "home"){
+  if(level === "beginner"){
+    workouts = [
+      "Push-ups",
+      "Squats",
+      "Plank",
+      "Walking"
+    ];
+  } else {
+    workouts = [
+      "Decline Push-ups",
+      "Jump Squats",
+      "Plank Variations",
+      "HIIT"
+    ];
+  }
 }
 
 document.getElementById("workoutPlan").innerHTML =
-  plan.slice(0, days).map(d => `<li>${d}</li>`).join("");
+  workouts.map(w => `<li>${w}</li>`).join("");
 </script>
 
 </body>
