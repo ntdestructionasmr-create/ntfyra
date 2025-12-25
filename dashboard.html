@@ -9,34 +9,50 @@
 
   <div class="overlay"></div>
 
-  <div class="app">
+  <div class="app dash-enter">
 
-    <!-- TOP TABS -->
+    <!-- PREMIUM BADGE -->
+    <div id="premiumBadge" class="premium-badge hidden">PREMIUM</div>
+
+    <!-- TABS -->
     <div class="tabs">
-      <button class="tab active" data-tab="home">Dashboard</button>
-      <button class="tab" data-tab="workout">Workout</button>
+      <button class="tab active" data-tab="workout">Workout</button>
       <button class="tab" data-tab="diet">Diet</button>
+      <button class="tab" data-tab="progress">Progress</button>
       <button class="tab premium-btn">AI Coach 🔒</button>
     </div>
 
-    <!-- CONTENT -->
     <div class="content">
 
-      <div class="page active" id="home">
-        <h2>Welcome Back 💪</h2>
-        <p>Your personalized fitness plan is ready.</p>
+      <!-- WORKOUT -->
+      <div class="page active" id="workout">
+        <h2 id="workoutTitle"></h2>
+        <ul id="weeklySplit"></ul>
+
+        <div class="daily-box">
+          <h3>Today's Workout</h3>
+          <ul id="dailyWorkout"></ul>
+        </div>
       </div>
 
-      <div class="page" id="workout">
-        <h2>Workout Plan</h2>
-        <ul id="workoutList"></ul>
-        <button class="premium-btn">Advanced Split 🔒</button>
-      </div>
-
+      <!-- DIET -->
       <div class="page" id="diet">
-        <h2>Diet Plan (Grams)</h2>
+        <h2 id="dietTitle"></h2>
         <ul id="dietList"></ul>
       </div>
+
+      <!-- PROGRESS -->
+      <div class="page" id="progress">
+        <h2>Weight Progress</h2>
+        <input type="number" id="newWeight" placeholder="Enter today weight">
+        <button id="saveWeight" class="primary-btn">Save</button>
+        <canvas id="weightChart" height="200"></canvas>
+      </div>
+
+      <!-- TEST PREMIUM BUTTON -->
+      <button id="unlockPremium" class="primary-btn">
+        Simulate Premium Unlock 🔓
+      </button>
 
     </div>
   </div>
@@ -44,11 +60,9 @@
   <!-- PREMIUM POPUP -->
   <div id="premiumPopup" class="popup hidden">
     <div class="popup-box">
-      <h3>Premium Membership 🚀</h3>
-      <p>AI Coach • Advanced Workouts • Smart Diet</p>
-      <h2>₹99 / month</h2>
-
-      <button class="upgrade">Upgrade</button>
+      <h3>Upgrade to Premium 🚀</h3>
+      <p>Equipment Workouts • Smart Diet • AI Coach</p>
+      <button class="primary-btn">Upgrade</button>
       <button class="later" id="closePopup">Later</button>
     </div>
   </div>
