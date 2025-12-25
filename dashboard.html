@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NTFYRA Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hidden { display: none; }
+    .box {
+      background: #f1f3f6;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>User Details</h1>
+
+  <!-- USER DETAILS FORM -->
+  <div class="box">
+    <label>Height (cm)</label>
+    <input type="number" id="height">
+
+    <label>Weight (kg)</label>
+    <input type="number" id="weight">
+
+    <label>Diet Type</label>
+    <select id="diet">
+      <option value="veg">Vegetarian</option>
+      <option value="nonveg">Non-Vegetarian</option>
+    </select>
+
+    <label>Workout Type</label>
+    <select id="workout" onchange="checkWorkout()">
+      <option value="">Select</option>
+      <option value="home">Home</option>
+      <option value="gym">Gym</option>
+    </select>
+
+    <!-- GYM LEVEL -->
+    <div id="gymBox" class="hidden">
+      <label>Gym Level</label>
+      <select id="gymLevel">
+        <option value="beginner">Beginner</option>
+        <option value="advanced">Advanced</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ACTIVITIES -->
+  <div class="box">
+    <label>Other Activities</label><br>
+
+    <input type="checkbox" id="dance" onchange="toggle('danceBox')"> Dance
+    <div id="danceBox" class="hidden">
+      <select id="danceType">
+        <option>Freestyle</option>
+        <option>Hip-Hop</option>
+        <option>Classical</option>
+      </select>
+    </div>
+
+    <input type="checkbox" id="zumba" onchange="toggle('zumbaBox')"> Zumba
+    <div id="zumbaBox" class="hidden">
+      <select id="zumbaLevel">
+        <option>Beginner</option>
+        <option>Intermediate</option>
+      </select>
+    </div>
+
+    <input type="checkbox" id="yoga" onchange="toggle('yogaBox')"> Yoga
+    <div id="yogaBox" class="hidden">
+      <select id="yogaType">
+        <option>Flexibility</option>
+        <option>Relaxation</option>
+      </select>
+    </div>
+  </div>
+
+  <button onclick="saveData()">Save & View Summary</button>
+
+  <!-- SUMMARY -->
+  <div class="box" id="summary"></div>
+
+</div>
+
+<script>
+  function checkWorkout() {
+    if (workout.value === "gym")
+      gymBox.classList.remove("hidden");
+    else
+      gymBox.classList.add("hidden");
+  }
+
+  function toggle(id) {
+    document.getElementById(id).classList.toggle("hidden");
+  }
+
+  function saveData() {
+    const summaryHTML = `
+      <b>Height:</b> ${height.value} cm<br>
+      <b>Weight:</b> ${weight.value} kg<br>
+      <b>Diet:</b> ${diet.value}<br>
+      <b>Workout:</b> ${workout.value}<br>
+      ${workout.value === "gym" ? `<b>Gym Level:</b> ${gymLevel.value}<br>` : ""}
+      <br><b>Activities:</b><br>
+      ${dance.checked ? "Dance: " + danceType.value + "<br>" : ""}
+      ${zumba.checked ? "Zumba: " + zumbaLevel.value + "<br>" : ""}
+      ${yoga.checked ? "Yoga: " + yogaType.value + "<br>" : ""}
+    `;
+    document.getElementById("summary").innerHTML = summaryHTML;
+  }
+</script>
+
+</body>
+</html>
