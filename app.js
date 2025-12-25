@@ -1,88 +1,173 @@
-// ===============================
-// HARD RESET POPUP ON PAGE LOAD
-// ===============================
+// FORCE POPUP HIDDEN
 const popup = document.getElementById("premiumPopup");
+popup.classList.add("hidden");
 
-// Force hide popup always on load
-window.addEventListener("load", () => {
-  popup.classList.add("hidden");
-});
+// USER DATA
+const weight = Number(localStorage.getItem("weight")) || 70;
+const place = localStorage.getItem("place") || "home";
+const isPremium = localStorage.getItem("premium") === "true";
 
-// ===============================
-// TAB SWITCHING
-// ===============================
+// SHOW PREMIUM BADGE
+if (isPremium) {
+  document.getElementById("premiumBadge").classList.remove("hidden");
+}
+
+// TABS
 document.querySelectorAll(".tab").forEach(tab => {
-  tab.addEventListener("click", () => {
+  tab.onclick = () => {
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-
     tab.classList.add("active");
     const id = tab.dataset.tab;
     if (id) document.getElementById(id).classList.add("active");
-  });
+  };
 });
 
-// ===============================
-// USER DATA
-// ===============================
-const weight = Number(localStorage.getItem("weight")) || 70;
-const level  = localStorage.getItem("level") || "beginner";
-const place  = localStorage.getItem("place") || "home";
+// WEEKLY SPLITS
+const basicWeeklySplit = [
+  "Mon – Full Body",
+  "Tue – Cardio + Abs",
+  "Wed – Upper Body",
+  "Thu – Lower Body",
+  "Fri – Full Body",
+  "Sat – Cardio",
+  "Sun – Rest"
+];
 
-// ===============================
-// WORKOUT LOGIC
-// ===============================
-const workouts = {
-  beginner: {
-    home: ["Push-ups 3×15", "Squats 3×20", "Plank 60s"],
-    gym: ["Bench Press 3×10", "Leg Press 3×12", "Lat Pulldown 3×10"]
-  },
-  advanced: {
-    home: ["Pike Pushups 4×12", "Jump Squats 4×20", "Plank 90s"],
-    gym: ["Bench Press 4×8", "Deadlift 4×6", "Pull-ups 4×10"]
-  }
+const premiumWeeklySplit = {
+  gym: [
+    "Mon – Chest (Equipment)",
+    "Tue – Back (Equipment)",
+    "Wed – Legs (Equipment)",
+    "Thu – Shoulders",
+    "Fri – Arms",
+    "Sat – Abs + Cardio",
+    "Sun – Rest"
+  ],
+  home: [
+    "Mon – Push",
+    "Tue – Pull",
+    "Wed – Legs",
+    "Thu – Core",
+    "Fri – Upper Body",
+    "Sat – HIIT",
+    "Sun – Rest"
+  ]
 };
 
-const workoutList = document.getElementById("workoutList");
-if (workoutList) {
-  workouts[level][place].forEach(w => {
+const weeklyEl = document.getElementById("weeklySplit");
+weeklyEl.innerHTML = "";
+
+if (!isPremium) {
+  document.getElementById("workoutTitle").innerText =
+    "Weekly Bodyweight Split";
+  basicWeeklySplit.forEach(d => {
     const li = document.createElement("li");
-    li.textContent = w;
-    workoutList.appendChild(li);
+    li.textContent = d;
+    weeklyEl.appendChild(li);
+  });
+} else {
+  document.getElementById("workoutTitle").innerText =
+    "Weekly Equipment Split 💎";
+  premiumWeeklySplit[place].forEach(d => {
+    const li = document.createElement("li");
+    li.textContent = d;
+    weeklyEl.appendChild(li);
   });
 }
 
-// ===============================
-// DIET LOGIC
-// ===============================
+// DAILY WORKOUT
+const today = new Date().getDay();
+const dailyEl = document.getElementById("dailyWorkout");
+dailyEl.innerHTML = "";
+
+const dailyBasic = [
+  "Rest",
+  "Full Body",
+  "Cardio",
+  "Upper Body",
+  "Lower Body",
+  "Full Body",
+  "Cardio"
+];
+
+const dailyPremium = {
+  gym: ["Rest","Chest","Back","Legs","Shoulders","Arms","Abs"],
+  home:["Rest","Push","Pull","Legs","Core","Upper","HIIT"]
+};
+
+const li = document.createElement("li");
+li.textContent = isPremium
+  ? dailyPremium[place][today]
+  : dailyBasic[today];
+dailyEl.appendChild(li);
+
+// DIET
+const dietTitle = document.getElementById("dietTitle");
 const dietList = document.getElementById("dietList");
-if (dietList) {
+dietList.innerHTML = "";
+
+if (!isPremium) {
+  dietTitle.innerText = "Basic Diet Plan";
+  ["Oats","Eggs","Rice","Dal / Chicken","Vegetables","Fruits"]
+    .forEach(i => {
+      const li = document.createElement("li");
+      li.textContent = i + " 🔒";
+      dietList.appendChild(li);
+    });
+} else {
+  dietTitle.innerText = "Smart Diet Plan (Grams)";
   [
     `Oats – ${weight} g`,
-    `Eggs – ${Math.round(weight / 10)} eggs`,
-    `Rice – ${weight * 2} g`,
-    `Chicken – ${weight * 2.5} g`,
+    `Eggs – ${Math.round(weight/10)} eggs`,
+    `Rice – ${weight*2} g`,
+    `Chicken – ${weight*2.5} g`,
     `Vegetables – 100 g`
-  ].forEach(d => {
+  ].forEach(i => {
     const li = document.createElement("li");
-    li.textContent = d;
+    li.textContent = i;
     dietList.appendChild(li);
   });
 }
 
-// ===============================
-// PREMIUM POPUP (CLICK ONLY)
-// ===============================
-document.querySelectorAll(".premium-btn").forEach(btn => {
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();     // 🔴 VERY IMPORTANT
-    popup.classList.remove("hidden");
-  });
-});
+// PROGRESS GRAPH
+const ctx = document.getElementById("weightChart");
+let progress = JSON.parse(localStorage.getItem("progress")) || [];
 
-// ===============================
-// CLOSE POPUP
-// ===============================
-document.getElementById("closePopup").addEventListener("click", () => {
-  popup.classList.add("hidden");
+function drawChart() {
+  if (!ctx) return;
+  const c = ctx.getContext("2d");
+  c.clearRect(0,0,ctx.width,ctx.height);
+  c.beginPath();
+  c.strokeStyle = "#00ff88";
+  progress.forEach((w,i)=>{
+    const x = (i/(progress.length-1||1))*ctx.width;
+    const y = ctx.height - w*2;
+    i===0 ? c.moveTo(x,y) : c.lineTo(x,y);
+  });
+  c.stroke();
+}
+drawChart();
+
+saveWeight.onclick = () => {
+  const v = Number(newWeight.value);
+  if (!v) return;
+  progress.push(v);
+  localStorage.setItem("progress",JSON.stringify(progress));
+  drawChart();
+};
+
+// PREMIUM SIMULATE
+unlockPremium.onclick = () => {
+  localStorage.setItem("premium","true");
+  location.reload();
+};
+
+// POPUP ONLY ON CLICK
+document.querySelectorAll(".premium-btn").forEach(btn=>{
+  btn.onclick = e => {
+    e.preventDefault();
+    popup.classList.remove("hidden");
+  };
 });
+closePopup.onclick = () => popup.classList.add("hidden");
