@@ -1,49 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NTFYRA – Get My Plan</title>
+  <title>NTFYRA Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>NTFYRA</h1>
-  <p>Enter your details to generate your smart fitness plan</p>
+  <h1>Welcome to NTFYRA 💪</h1>
+  <p>Your Smart Fitness System</p>
 
-  <form action="dashboard.html" onsubmit="saveUserData()">
+  <hr>
 
-    <label>Weight (kg)</label>
-    <input type="number" id="weight" required>
+  <h2>Today's Personalized Plan</h2>
 
-    <label>Height (cm)</label>
-    <input type="number" id="height" required>
+  <!-- WORKOUT -->
+  <h3>🏋️ Workout</h3>
+  <p id="workoutPlan"></p>
 
-    <label>Goal</label>
-    <select id="goal" required>
-      <option value="gain">Weight Gain</option>
-      <option value="muscle">Muscle Gain</option>
-      <option value="maintain">Maintain</option>
-    </select>
+  <!-- DIET -->
+  <h3>🍽️ Diet Plan</h3>
+  <div id="dietPlan"></div>
 
-    <label>Workout Type</label>
-    <select id="workout" required>
-      <option value="home">Home</option>
-      <option value="gym">Gym</option>
-      <option value="both">Home + Gym</option>
-    </select>
+  <!-- YOGA -->
+  <h3>🧘 Yoga</h3>
+  <p>5–10 minutes morning stretching & breathing</p>
 
-    <button type="submit">Generate My Plan</button>
-  </form>
+  <hr>
+  <a href="index.html">⬅ Back to Home</a>
 
   <script>
-    function saveUserData() {
-      localStorage.setItem("weight", document.getElementById("weight").value);
-      localStorage.setItem("height", document.getElementById("height").value);
-      localStorage.setItem("goal", document.getElementById("goal").value);
-      localStorage.setItem("workout", document.getElementById("workout").value);
+    const weight = Number(localStorage.getItem("weight"));
+    const goal = localStorage.getItem("goal");
+    const workout = localStorage.getItem("workout");
+
+    /* WORKOUT LOGIC */
+    let workoutText = "";
+    if (workout === "home")
+      workoutText = "Home Workout – Pushups, Squats, Plank";
+    if (workout === "gym")
+      workoutText = "Gym Workout – Chest, Back, Legs";
+    if (workout === "both")
+      workoutText = "Mixed Workout – Home + Gym";
+
+    document.getElementById("workoutPlan").innerText = workoutText;
+
+    /* DIET LOGIC */
+    let calories = 0;
+    let protein = 0;
+
+    if (goal === "gain") {
+      calories = weight * 38;
+      protein = weight * 1.6;
+    } else if (goal === "muscle") {
+      calories = weight * 33;
+      protein = weight * 2;
+    } else {
+      calories = weight * 29;
+      protein = weight * 1.5;
     }
+
+    document.getElementById("dietPlan").innerHTML = `
+      <p><b>Daily Calories:</b> ${calories} kcal</p>
+      <p><b>Protein Target:</b> ${protein} g</p>
+
+      <ul>
+        <li><b>Breakfast:</b> Eggs / Paneer + Chapati</li>
+        <li><b>Lunch:</b> Rice + Dal / Chicken + Vegetables</li>
+        <li><b>Snack:</b> Banana + Peanuts</li>
+        <li><b>Dinner:</b> Chapati + Eggs / Paneer</li>
+      </ul>
+    `;
   </script>
 
 </body>
 </html>
+
 
 
