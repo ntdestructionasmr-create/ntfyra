@@ -1,124 +1,55 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NTFYRA Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="gym-bg">
 
-.gym-bg {
-  min-height: 100vh;
-  background:
-    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
-    url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438");
-  background-size: cover;
-  background-position: center;
-  color: white;
-}
+  <div class="overlay"></div>
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: 1;
-}
+  <div class="app dash-enter">
 
-.app {
-  position: relative;
-  z-index: 2;
-  padding: 20px;
-}
+    <div class="tabs">
+      <button class="tab active" data-tab="home">Dashboard</button>
+      <button class="tab" data-tab="workout">Workout</button>
+      <button class="tab" data-tab="diet">Diet</button>
+      <button class="tab premium-btn">AI Coach 🔒</button>
+    </div>
 
-/* TOP TABS */
-.top-tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+    <div class="content">
 
-.tab {
-  padding: 10px 16px;
-  border-radius: 12px;
-  border: none;
-  background: rgba(255,255,255,0.1);
-  color: white;
-  cursor: pointer;
-}
+      <div class="page active" id="home">
+        <h2>Welcome Back 💪</h2>
+        <p>Your system is ready.</p>
+      </div>
 
-.tab.active {
-  background: #00ff88;
-  color: black;
-  font-weight: bold;
-}
+      <div class="page" id="workout">
+        <h2>Workout Plan</h2>
+        <ul id="workoutList"></ul>
+        <button class="premium-btn primary-btn">Advanced Split 🔒</button>
+      </div>
 
-/* CONTENT */
-.content {
-  background: rgba(0,0,0,0.6);
-  padding: 20px;
-  border-radius: 16px;
-  max-width: 420px;
-}
+      <div class="page" id="diet">
+        <h2>Diet Plan</h2>
+        <ul id="dietList"></ul>
+      </div>
 
-/* PAGES */
-.page {
-  display: none;
-}
+    </div>
+  </div>
 
-.page.active {
-  display: block;
-}
+  <!-- POPUP -->
+  <div id="premiumPopup" class="popup hidden">
+    <div class="popup-box">
+      <h3>Premium Membership 🚀</h3>
+      <p>Advanced Workouts • AI Coach</p>
+      <h2>₹99 / month</h2>
+      <button class="primary-btn">Upgrade</button>
+      <button class="later" id="closePopup">Later</button>
+    </div>
+  </div>
 
-.card {
-  background: rgba(255,255,255,0.08);
-  padding: 15px;
-  border-radius: 12px;
-  margin-top: 15px;
-}
-
-/* BUTTONS */
-button {
-  margin-top: 15px;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-}
-
-.premium-btn {
-  background: #ffb703;
-  color: black;
-  font-weight: bold;
-}
-
-/* POPUP */
-.popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 5;
-}
-
-.hidden {
-  display: none;
-}
-
-.popup-box {
-  background: #111;
-  padding: 25px;
-  border-radius: 16px;
-  text-align: center;
-}
-
-.upgrade {
-  background: #00ff88;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.later {
-  background: transparent;
-  color: #aaa;
-  margin-top: 10px;
-}
+  <script src="app.js"></script>
+</body>
+</html>
