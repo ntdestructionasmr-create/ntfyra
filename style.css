@@ -9,43 +9,60 @@
 body {
   min-height: 100vh;
   font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background:
+    radial-gradient(circle at top, #1f3cff, transparent 40%),
+    linear-gradient(135deg, #0b132b, #1c2541, #3a506b);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
 }
 
-/* ===== MAIN CARD ===== */
+/* ===== APP CARD (GLASS EFFECT) ===== */
 .container {
   width: 100%;
   max-width: 420px;
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 25px 45px rgba(0,0,0,0.35);
-  color: #222;
+  padding: 22px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1a1a1a;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
 }
 
-/* ===== HEADINGS ===== */
-h1 {
+/* ===== BRAND ===== */
+.brand {
   text-align: center;
+  margin-bottom: 20px;
+}
+
+.brand h1 {
   color: #1f3cff;
-  margin-bottom: 5px;
+  letter-spacing: 1px;
 }
 
 .subtitle {
-  text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
-  margin-bottom: 25px;
 }
 
+/* ===== SECTION CARD ===== */
+.section {
+  background: linear-gradient(135deg, #f6f8ff, #eef2ff);
+  padding: 15px;
+  border-radius: 14px;
+  margin-top: 16px;
+  border-left: 4px solid #1f3cff;
+}
+
+/* ===== HEADINGS ===== */
 h2 {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 h3 {
-  margin: 15px 0 8px;
+  font-size: 15px;
+  margin-bottom: 6px;
 }
 
 /* ===== FORM ===== */
@@ -57,32 +74,35 @@ label {
 
 input, select {
   width: 100%;
-  padding: 10px;
+  padding: 11px;
   margin-top: 6px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 14px;
+  background: #fff;
 }
 
-/* ===== BUTTONS ===== */
+/* ===== BUTTON ===== */
 button {
   width: 100%;
-  padding: 12px;
-  margin-top: 20px;
+  padding: 13px;
+  margin-top: 18px;
   border: none;
-  border-radius: 10px;
+  border-radius: 14px;
   background: linear-gradient(135deg, #1f3cff, #5f7cff);
   color: white;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 button:hover {
-  transform: scale(1.04);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(31,60,255,0.4);
 }
 
+/* ===== SECONDARY BUTTON ===== */
 .pdf-btn {
   background: linear-gradient(135deg, #00c853, #64dd17);
 }
@@ -98,20 +118,28 @@ li {
   margin-bottom: 6px;
 }
 
-/* ===== SECTIONS ===== */
-.section {
-  background: #f6f8ff;
-  padding: 15px;
-  border-radius: 10px;
-  margin-top: 15px;
-}
-
-/* ===== LINKS ===== */
+/* ===== LINK ===== */
 a {
   display: block;
-  margin-top: 15px;
   text-align: center;
+  margin-top: 18px;
   color: #1f3cff;
   font-weight: bold;
   text-decoration: none;
+}
+
+/* ===== SMALL ANIMATION ===== */
+.section {
+  animation: fadeUp 0.6s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
