@@ -1,33 +1,31 @@
 /* ===== RESET ===== */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 /* ===== BACKGROUND ===== */
 body {
   min-height: 100vh;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background:
-    radial-gradient(circle at top, #1f3cff, transparent 40%),
-    linear-gradient(135deg, #0b132b, #1c2541, #3a506b);
+  font-family: "Segoe UI", monospace;
+  background: radial-gradient(circle at top, #00ffe7, transparent 35%),
+              linear-gradient(135deg, #020617, #020617);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: #e5e7eb;
 }
 
-/* ===== APP CARD (GLASS EFFECT) ===== */
+/* ===== MAIN CYBER PANEL ===== */
 .container {
   width: 100%;
-  max-width: 420px;
+  max-width: 430px;
+  background: rgba(10, 15, 30, 0.9);
+  border-radius: 18px;
   padding: 22px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.92);
-  color: #1a1a1a;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  border: 1px solid rgba(0,255,231,0.3);
+  box-shadow: 0 0 25px rgba(0,255,231,0.25);
 }
 
 /* ===== BRAND ===== */
@@ -37,109 +35,93 @@ body {
 }
 
 .brand h1 {
-  color: #1f3cff;
-  letter-spacing: 1px;
+  color: #00ffe7;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(0,255,231,0.8);
 }
 
 .subtitle {
-  font-size: 13px;
-  color: #666;
+  font-size: 12px;
+  color: #9ca3af;
 }
 
-/* ===== SECTION CARD ===== */
+/* ===== SECTIONS ===== */
 .section {
-  background: linear-gradient(135deg, #f6f8ff, #eef2ff);
-  padding: 15px;
+  background: rgba(2, 6, 23, 0.8);
+  border: 1px solid rgba(0,255,231,0.2);
   border-radius: 14px;
+  padding: 14px;
   margin-top: 16px;
-  border-left: 4px solid #1f3cff;
+  box-shadow: inset 0 0 10px rgba(0,255,231,0.15);
 }
 
-/* ===== HEADINGS ===== */
-h2 {
-  margin-bottom: 10px;
-}
-
-h3 {
-  font-size: 15px;
+.section h3 {
+  font-size: 14px;
+  color: #00ffe7;
   margin-bottom: 6px;
 }
 
-/* ===== FORM ===== */
-label {
+/* ===== TEXT ===== */
+p, li {
   font-size: 13px;
-  margin-top: 12px;
-  display: block;
+  color: #d1d5db;
 }
 
+ul {
+  padding-left: 18px;
+}
+
+/* ===== INPUTS ===== */
 input, select {
   width: 100%;
-  padding: 11px;
   margin-top: 6px;
+  padding: 10px;
   border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  background: #fff;
+  background: #020617;
+  color: #00ffe7;
+  border: 1px solid rgba(0,255,231,0.3);
+  font-family: monospace;
 }
 
-/* ===== BUTTON ===== */
+/* ===== BUTTONS ===== */
 button {
   width: 100%;
-  padding: 13px;
-  margin-top: 18px;
-  border: none;
+  margin-top: 16px;
+  padding: 12px;
   border-radius: 14px;
-  background: linear-gradient(135deg, #1f3cff, #5f7cff);
-  color: white;
-  font-size: 15px;
+  border: none;
   font-weight: bold;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #00ffe7, #0ea5e9);
+  color: #020617;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 button:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 10px 20px rgba(31,60,255,0.4);
+  transform: scale(1.04);
+  box-shadow: 0 0 20px rgba(0,255,231,0.8);
 }
 
-/* ===== SECONDARY BUTTON ===== */
+/* ===== SECONDARY ===== */
 .pdf-btn {
-  background: linear-gradient(135deg, #00c853, #64dd17);
+  background: linear-gradient(135deg, #22c55e, #4ade80);
 }
 
-/* ===== LISTS ===== */
-ul {
-  padding-left: 18px;
-  margin-top: 8px;
-}
-
-li {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-/* ===== LINK ===== */
+/* ===== LINKS ===== */
 a {
   display: block;
   text-align: center;
   margin-top: 18px;
-  color: #1f3cff;
-  font-weight: bold;
+  color: #00ffe7;
   text-decoration: none;
+  font-size: 13px;
 }
 
-/* ===== SMALL ANIMATION ===== */
-.section {
-  animation: fadeUp 0.6s ease;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ===== TERMINAL EFFECT ===== */
+.terminal {
+  font-family: monospace;
+  font-size: 12px;
+  color: #00ffe7;
+  opacity: 0.8;
 }
