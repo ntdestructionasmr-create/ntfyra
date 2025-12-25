@@ -1,63 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NTFYRA – Setup Your Plan</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Get My Plan</title>
 </head>
 <body>
 
-<div class="container">
-  <h1>NTFYRA Setup</h1>
-  <p>Build your personalized fitness plan</p>
+<h2>Enter Your Details</h2>
 
-  <form action="dashboard.html" onsubmit="saveUserData()">
+<form action="dashboard.html" onsubmit="saveUserData()">
 
-    <label>Weight (kg)</label>
-    <input type="number" id="weight" required>
+  <label>Height (cm)</label><br>
+  <input type="number" id="height" required><br><br>
 
-    <label>Height (cm)</label>
-    <input type="number" id="height" required>
+  <label>Weight (kg)</label><br>
+  <input type="number" id="weight" required><br><br>
 
-    <label>Goal</label>
-    <select id="goal">
-      <option value="gain">Weight Gain</option>
-      <option value="muscle">Muscle Gain</option>
-      <option value="maintain">Maintain</option>
-    </select>
+  <label>Goal</label><br>
+  <select id="goal">
+    <option value="gain">Weight Gain</option>
+    <option value="muscle">Muscle Gain</option>
+    <option value="maintain">Maintain</option>
+  </select><br><br>
 
-    <label>Workout Type</label>
-    <select id="workout">
-      <option value="home">Home</option>
-      <option value="gym">Gym</option>
-      <option value="both">Home + Gym</option>
-    </select>
+  <label>Workout Type</label><br>
+  <select id="workout">
+    <option value="gym">Gym</option>
+    <option value="home">Home</option>
+  </select><br><br>
 
-    <label>Fitness Level</label>
-    <select id="level">
-      <option value="beginner">Beginner</option>
-      <option value="intermediate">Intermediate</option>
-    </select>
+  <label>Level</label><br>
+  <select id="level">
+    <option value="beginner">Beginner</option>
+    <option value="advanced">Advanced</option>
+  </select><br><br>
 
-    <label>Days per Week</label>
-    <select id="days">
-      <option value="3">3 Days</option>
-      <option value="4">4 Days</option>
-      <option value="5">5 Days</option>
-      <option value="6">6 Days</option>
-    </select>
-
-    <button type="submit">Generate My Plan</button>
-  </form>
-</div>
+  <button type="submit">Generate Plan</button>
+</form>
 
 <script>
-function saveUserData() {
-  localStorage.setItem("weight", weight.value);
+function saveUserData(){
   localStorage.setItem("height", height.value);
+  localStorage.setItem("weight", weight.value);
   localStorage.setItem("goal", goal.value);
   localStorage.setItem("workout", workout.value);
   localStorage.setItem("level", level.value);
-  localStorage.setItem("days", days.value);
 }
 </script>
 
