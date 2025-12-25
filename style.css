@@ -1,4 +1,11 @@
-/* BACKGROUND */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* WELCOME */
 .welcome-bg {
   min-height: 100vh;
   background:
@@ -7,72 +14,122 @@
   background-size: cover;
   background-position: center;
   color: white;
-  font-family: "Segoe UI", sans-serif;
-}
-
-/* HERO */
-.welcome-hero {
   text-align: center;
-  padding-top: 140px;
 }
 
-.welcome-hero h1 {
-  font-size: 52px;
-  letter-spacing: 2px;
+.welcome-hero {
+  padding-top: 140px;
 }
 
 .welcome-hero span {
   color: #00ff88;
 }
 
-.welcome-hero p {
-  font-size: 18px;
-  margin-top: 10px;
-  opacity: 0.9;
-}
-
 .welcome-hero button {
   margin-top: 30px;
   padding: 14px 36px;
-  font-size: 16px;
   border-radius: 30px;
-  border: none;
   background: #00ff88;
-  color: black;
-  cursor: pointer;
+  border: none;
   font-weight: bold;
 }
 
-/* ONBOARD CARD */
+/* ONBOARD */
 .onboard-card {
   width: 340px;
   background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(10px);
   padding: 28px;
   border-radius: 18px;
   margin: auto;
-  margin-top: 80px;
-  box-shadow: 0 0 40px rgba(0,255,136,0.2);
-}
-
-.onboard-card h2 {
-  text-align: center;
-  margin-bottom: 15px;
+  margin-top: 60px;
+  backdrop-filter: blur(10px);
 }
 
 input, select, button {
   width: 100%;
-  padding: 11px;
+  padding: 12px;
   margin-top: 12px;
   border-radius: 10px;
   border: none;
 }
 
-button {
-  background: #00ff88;
-  font-weight: bold;
-}
-
 .hidden {
   display: none;
+}
+
+/* DASHBOARD */
+.gym-bg {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)),
+    url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438");
+  background-size: cover;
+  color: white;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.app {
+  position: relative;
+  padding: 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.tab {
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+}
+
+.tab.active {
+  background: #00ff88;
+  color: black;
+}
+
+.content {
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 20px;
+  max-width: 420px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+/* POPUP */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-box {
+  background: #111;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.later {
+  background: transparent;
+  color: #aaa;
 }
