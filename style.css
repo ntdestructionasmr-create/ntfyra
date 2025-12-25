@@ -1,90 +1,41 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
-
+* { box-sizing: border-box; font-family: Arial; }
 .hidden { display: none !important; }
 
-/* BACKGROUNDS */
 .welcome-bg, .gym-bg {
   min-height: 100vh;
-  background:
-    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.95)),
-    url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438");
+  background: linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.9)),
+  url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438");
   background-size: cover;
-  background-position: center;
   color: white;
 }
 
-/* BRAND */
 .brand-title {
-  font-size: 72px;
-  letter-spacing: 6px;
-  font-weight: 900;
+  font-size: 70px;
   color: #00ff88;
-  text-shadow: 0 0 40px rgba(0,255,136,0.4);
-  margin-top: 140px;
-  animation: fadeIn 1.4s ease forwards;
+  text-align: center;
+  margin-top: 150px;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* BUTTON */
 .primary-btn {
-  margin-top: 25px;
-  padding: 14px 30px;
+  padding: 12px 28px;
   border-radius: 30px;
   background: #00ff88;
   border: none;
   font-weight: bold;
-  cursor: pointer;
 }
 
-.primary-btn:hover {
-  transform: translateY(-2px);
-}
-
-/* ONBOARD */
 .onboard-card {
-  width: 340px;
-  background: rgba(0,0,0,0.65);
-  padding: 28px;
-  border-radius: 18px;
-  margin: 60px auto;
+  width: 320px;
+  background: rgba(0,0,0,.6);
+  padding: 20px;
+  margin: 40px auto;
+  border-radius: 14px;
 }
 
 input, select {
   width: 100%;
-  padding: 12px;
-  margin-top: 12px;
-  border-radius: 10px;
-  border: none;
-}
-
-/* DASHBOARD */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-}
-
-.app {
-  position: relative;
-  padding: 20px;
-}
-
-.dash-enter {
-  animation: slideUp .6s ease;
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
+  padding: 10px;
+  margin-top: 10px;
 }
 
 .tabs {
@@ -94,10 +45,10 @@ input, select {
 
 .tab {
   padding: 10px 16px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,.1);
   border: none;
   color: white;
+  border-radius: 10px;
 }
 
 .tab.active {
@@ -106,50 +57,43 @@ input, select {
 }
 
 .content {
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,.6);
   padding: 20px;
   border-radius: 16px;
-  margin-top: 20px;
-  max-width: 420px;
+  margin-top: 15px;
 }
 
 .page { display: none; }
 .page.active { display: block; }
 
-#weeklySplit li,
-#dietList li {
+#weeklySplit li {
   list-style: none;
-  padding: 10px;
+  padding: 8px;
   margin-bottom: 6px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,.08);
   border-radius: 10px;
 }
 
-/* DAILY BOX */
-.daily-box {
-  margin-top: 15px;
-  padding: 12px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 12px;
+.premium-note {
+  margin-top: 20px;
+  padding: 14px;
+  border: 1px dashed gold;
+  border-radius: 14px;
 }
 
-/* PREMIUM BADGE */
-.premium-badge {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 20px;
-  background: linear-gradient(90deg,#ffd700,#ffb703);
-  color: black;
-  font-weight: bold;
+.premium-note li {
+  font-size: 14px;
+}
+
+.note-small {
   font-size: 12px;
-  margin-bottom: 10px;
+  opacity: .8;
 }
 
-/* POPUP */
 .popup {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -157,12 +101,6 @@ input, select {
 
 .popup-box {
   background: #111;
-  padding: 25px;
-  border-radius: 16px;
-}
-
-.later {
-  background: transparent;
-  color: #aaa;
-  margin-top: 10px;
+  padding: 20px;
+  border-radius: 14px;
 }
