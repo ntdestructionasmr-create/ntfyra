@@ -7,27 +7,95 @@
 <body>
 
 <div class="container">
-  <h1>🍽️ Diet Plan</h1>
+  <h1>🍽️ Your Diet Plan</h1>
+  <p>Balanced • Goal based • Simple</p>
 
-  <select id="dietType" onchange="loadDiet()">
-    <option value="veg">Veg</option>
-    <option value="nonveg">Non-Veg</option>
-  </select>
+  <!-- DIET TYPE -->
+  <div class="section">
+    <label>Diet Preference</label>
+    <select id="dietType" onchange="loadDiet()">
+      <option value="veg">🥗 Veg</option>
+      <option value="nonveg">🍗 Non-Veg</option>
+    </select>
+  </div>
 
-  <ul id="dietList"></ul>
+  <!-- CALORIES -->
+  <div class="section">
+    <p id="macro"></p>
+  </div>
+
+  <!-- DIET TABLE -->
+  <div class="section">
+    <table class="diet-table">
+      <tr>
+        <th>Meal</th>
+        <th>Food</th>
+      </tr>
+      <tr>
+        <td>Breakfast</td>
+        <td id="breakfast"></td>
+      </tr>
+      <tr>
+        <td>Lunch</td>
+        <td id="lunch"></td>
+      </tr>
+      <tr>
+        <td>Snack</td>
+        <td id="snack"></td>
+      </tr>
+      <tr>
+        <td>Dinner</td>
+        <td id="dinner"></td>
+      </tr>
+    </table>
+  </div>
 
   <a href="progress.html"><button>Next → Progress</button></a>
 </div>
 
 <script>
-function loadDiet(){
-  const type = dietType.value;
-  const foods = type === "veg"
-    ? ["Oats","Dal","Paneer","Fruits"]
-    : ["Eggs","Chicken","Rice","Fish"];
+/* ===== USER DATA ===== */
+const weight = localStorage.getItem("weight") || 60;
+const goal = localStorage.getItem("goal") || "maintain";
 
-  dietList.innerHTML = foods.map(f=>`<li>${f}</li>`).join("");
+/* ===== CALC ===== */
+let calories = 0;
+let protein = 0;
+
+if (goal === "gain") {
+  calories = weight * 38;
+  protein = weight * 1.6;
 }
+if (goal === "muscle") {
+  calories = weight * 33;
+  protein = weight * 2;
+}
+if (goal === "maintain") {
+  calories = weight * 29;
+  protein = weight * 1.5;
+}
+
+document.getElementById("macro").innerHTML =
+  `<b>Calories:</b> ${calories} kcal &nbsp; | &nbsp; <b>Protein:</b> ${protein} g`;
+
+/* ===== DIET LOGIC ===== */
+function loadDiet() {
+  const type = document.getElementById("dietType").value;
+
+  if (type === "veg") {
+    breakfast.innerText = "Oats + Milk / Paneer";
+    lunch.innerText = "Rice + Dal + Vegetables";
+    snack.innerText = "Fruits + Peanuts";
+    dinner.innerText = "Chapati + Paneer / Curd";
+  } else {
+    breakfast.innerText = "Eggs + Bread";
+    lunch.innerText = "Rice + Chicken / Fish";
+    snack.innerText = "Boiled Eggs / Banana";
+    dinner.innerText = "Chapati + Eggs / Fish";
+  }
+}
+
+/* INITIAL LOAD */
 loadDiet();
 </script>
 
