@@ -7,27 +7,33 @@
 <body>
 
   <h1>NTFYRA</h1>
-  <p>Enter your details to generate your smart fitness plan</p>
+  <p>Enter your details to generate your personalized fitness plan</p>
 
   <form action="dashboard.html" onsubmit="saveUserData()">
 
+    <!-- WEIGHT -->
     <label>Weight (kg)</label>
-    <input type="number" id="weight" required>
+    <input type="number" id="weight" placeholder="Eg: 60" required>
 
+    <!-- HEIGHT -->
     <label>Height (cm)</label>
-    <input type="number" id="height" required>
-    
-    <label>Goal</label>
+    <input type="number" id="height" placeholder="Eg: 170" required>
+
+    <!-- GOAL -->
+    <label>Your Goal</label>
     <select id="goal" required>
+      <option value="">-- Select Goal --</option>
       <option value="gain">Weight Gain</option>
       <option value="muscle">Muscle Gain</option>
-      <option value="maintain">Maintain</option>
+      <option value="maintain">Maintain / Lean</option>
     </select>
 
-    <label>Workout Type</label>
+    <!-- WORKOUT TYPE -->
+    <label>Workout Preference</label>
     <select id="workout" required>
-      <option value="home">Home</option>
-      <option value="gym">Gym</option>
+      <option value="">-- Select Workout Type --</option>
+      <option value="home">Home Workout</option>
+      <option value="gym">Gym Workout</option>
       <option value="both">Home + Gym</option>
     </select>
 
@@ -39,58 +45,9 @@
       localStorage.setItem("weight", document.getElementById("weight").value);
       localStorage.setItem("height", document.getElementById("height").value);
       localStorage.setItem("goal", document.getElementById("goal").value);
-      localStorage.setItem("workout", document.getElementById("workout").value);<script>
-  const weeklyPlan = document.getElementById("weeklyPlan");
-
-  let plan = [];
-
-  if (workout === "home") {
-    plan = [
-      "Mon – Chest & Arms (Home)",
-      "Tue – Legs & Core (Home)",
-      "Wed – Rest / Stretching",
-      "Thu – Back & Shoulders (Home)",
-      "Fri – Full Body (Home)",
-      "Sat – Yoga / Cardio",
-      "Sun – Rest"
-    ];
-  }
-
-  if (workout === "gym") {
-    plan = [
-      "Mon – Chest & Triceps (Gym)",
-      "Tue – Back & Biceps (Gym)",
-      "Wed – Legs (Gym)",
-      "Thu – Shoulders & Abs",
-      "Fri – Full Body",
-      "Sat – Cardio / Yoga",
-      "Sun – Rest"
-    ];
-  }
-
-  if (workout === "both") {
-    plan = [
-      "Mon – Gym: Chest",
-      "Tue – Home: Legs",
-      "Wed – Rest / Stretching",
-      "Thu – Gym: Back",
-      "Fri – Home: Full Body",
-      "Sat – Yoga / Cardio",
-      "Sun – Rest"
-    ];
-  }
-      
-  plan.forEach(day => {
-    const li = document.createElement("li");
-    li.innerText = day;
-    weeklyPlan.appendChild(li);
-  });
-</script>
-
+      localStorage.setItem("workout", document.getElementById("workout").value);
     }
   </script>
 
 </body>
 </html>
-
-
