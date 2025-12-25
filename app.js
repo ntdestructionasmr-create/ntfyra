@@ -1,120 +1,54 @@
-// TAB SWITCH
-document.querySelectorAll(".tab").forEach(tab => {
-  tab.onclick = () => {
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    tab.classList.add("active");
-    const id = tab.dataset.tab;
-    if (id) document.getElementById(id).classList.add("active");
-  };
-});
+// ===============================
+// DIET PLAN WITH CALORIES (ALL)
+// ===============================
+const basicDietEl = document.getElementById("basicDiet");
+const premiumDietEl = document.getElementById("premiumDiet");
 
-// USER DATA
-const place = localStorage.getItem("place") || "home";
-const isPremium = localStorage.getItem("premium") === "true";
-const weight = Number(localStorage.getItem("weight")) || 70;
+basicDietEl.innerHTML = "";
+premiumDietEl.innerHTML = "";
 
-// WEEKLY SPLIT (ALL)
-const weeklySplit = [
-  "Monday – Full Body",
-  "Tuesday – Cardio",
-  "Wednesday – Upper Body",
-  "Thursday – Lower Body",
-  "Friday – Full Body",
-  "Saturday – Cardio",
-  "Sunday – Rest"
-];
-
-weeklySplit.forEach(d => {
-  const li = document.createElement("li");
-  li.textContent = d;
-  weeklySplit.appendChild(li);
-});
-
-// DAILY SPLIT (PREMIUM)
-const dailySplit = {
-  gym: [
-    "Chest Machines",
-    "Back Machines",
-    "Leg Machines",
-    "Shoulder Machines",
-    "Arm Machines",
-    "Abs + Cardio",
-    "Rest"
-  ],
-  home: [
-    "Push",
-    "Pull",
-    "Legs",
-    "Core",
-    "Upper",
-    "HIIT",
-    "Rest"
-  ]
-};
-
-if (isPremium) {
-  dailySplit[place].forEach(d => {
-    const li = document.createElement("li");
-    li.textContent = d;
-    dailySplitEl.appendChild(li);
-  });
-} else {
-  dailySplitEl.innerHTML = "<li>🔒 Daily machine workouts (Premium only)</li>";
-}
-
-// DIET WITH CALORIES (ALL)
+// BASIC DIET (CALORIES FOR ALL)
 const basicDiet = [
-  ["Morning – Oats / Idli", 350],
-  ["Midday – Fruits", 150],
-  ["Lunch – Rice + Dal / Chicken", 600],
-  ["Evening – Eggs / Sprouts", 250],
-  ["Dinner – Chapati + Veg", 400]
+  { meal: "Morning – Oats / Ragi / Idli", cal: 350 },
+  { meal: "Midday – Fruits", cal: 150 },
+  { meal: "Lunch – Rice + Dal / Chicken", cal: 600 },
+  { meal: "Evening – Sprouts / Boiled Eggs", cal: 250 },
+  { meal: "Dinner – Light Rice / Chapati + Vegetables", cal: 400 }
 ];
 
-let total = 0;
-basicDiet.forEach(d => {
-  total += d[1];
+let totalCalories = 0;
+
+basicDiet.forEach(item => {
+  totalCalories += item.cal;
   const li = document.createElement("li");
-  li.textContent = `${d[0]} — ${d[1]} kcal`;
+  li.textContent = `${item.meal} — ${item.cal} kcal`;
   basicDietEl.appendChild(li);
 });
 
+// TOTAL CALORIES
 const totalLi = document.createElement("li");
 totalLi.style.fontWeight = "bold";
-totalLi.textContent = `Total ≈ ${total} kcal`;
+totalLi.textContent = `Total ≈ ${totalCalories} kcal`;
 basicDietEl.appendChild(totalLi);
 
-// PREMIUM DIET
+// PREMIUM EXTRA DETAILS
 if (isPremium) {
+  const weight = Number(localStorage.getItem("weight")) || 70;
+
   const premiumDiet = [
-    `Oats ${weight}g + Eggs ${Math.round(weight/10)}`,
-    "Pre-workout Banana",
-    `Rice ${weight*2}g + Chicken ${weight*2.5}g`,
-    "Post-workout Whey",
-    "Vegetables + Paneer"
+    `Morning – Oats ${weight} g + Eggs ${Math.round(weight / 10)} (~350 kcal)`,
+    `Pre-Workout – Banana + Black Coffee (~120 kcal)`,
+    `Lunch – Rice ${weight * 2} g + Chicken ${weight * 2.5} g (~650 kcal)`,
+    `Post-Workout – Whey Protein (~120 kcal)`,
+    `Dinner – Vegetables 100 g + Paneer / Eggs (~350 kcal)`
   ];
 
-  premiumDiet.forEach(d => {
+  premiumDiet.forEach(item => {
     const li = document.createElement("li");
-    li.textContent = d;
+    li.textContent = item;
     premiumDietEl.appendChild(li);
   });
 } else {
-  premiumDietEl.innerHTML = "<li>🔒 Grams & timings (Premium only)</li>";
+  premiumDietEl.innerHTML =
+    "<li>🔒 Exact grams, timings & protein breakdown (Premium only)</li>";
 }
-
-// POPUP CONTROL
-premiumPopup.classList.add("hidden");
-
-document.querySelectorAll(".premium-btn").forEach(b => {
-  b.onclick = () => premiumPopup.classList.remove("hidden");
-});
-
-closePopup.onclick = () => premiumPopup.classList.add("hidden");
-
-// SIMULATE PREMIUM
-unlockPremium.onclick = () => {
-  localStorage.setItem("premium","true");
-  location.reload();
-};
