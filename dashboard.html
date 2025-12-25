@@ -47,11 +47,13 @@
   <h1>Dashboard</h1>
 
   <!-- TABS -->
-  <div class="tabs">
-    <div class="tab active" onclick="openTab('user')">User Details</div>
-    <div class="tab" onclick="openTab('diet')">Diet</div>
-    <div class="tab" onclick="openTab('workout')">Workouts</div>
-  </div>
+  <!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="openTab('user', this)">User</button>
+  <button class="tab" onclick="openTab('diet', this)">Diet</button>
+  <button class="tab" onclick="openTab('workout', this)">Workouts</button>
+</div>
+
 
   <!-- USER DETAILS TAB -->
   <div id="user" class="section active">
