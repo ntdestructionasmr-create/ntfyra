@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Diet Plan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>🍽️ Diet Plan</h1>
+
+  <select id="dietType" onchange="loadDiet()">
+    <option value="veg">Veg</option>
+    <option value="nonveg">Non-Veg</option>
+  </select>
+
+  <ul id="dietList"></ul>
+
+  <a href="progress.html"><button>Next → Progress</button></a>
+</div>
+
+<script>
+function loadDiet(){
+  const type = dietType.value;
+  const foods = type === "veg"
+    ? ["Oats","Dal","Paneer","Fruits"]
+    : ["Eggs","Chicken","Rice","Fish"];
+
+  dietList.innerHTML = foods.map(f=>`<li>${f}</li>`).join("");
+}
+loadDiet();
+</script>
+
+</body>
+</html>
