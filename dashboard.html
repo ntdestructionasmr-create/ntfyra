@@ -1,72 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>NTFYRA Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="gym-bg">
 
-  <div class="overlay"></div>
+<div class="overlay"></div>
 
-  <div class="app dash-enter">
+<div class="app">
 
-    <!-- PREMIUM BADGE -->
-    <div id="premiumBadge" class="premium-badge hidden">PREMIUM</div>
-
-    <!-- TABS -->
-    <div class="tabs">
-      <button class="tab active" data-tab="workout">Workout</button>
-      <button class="tab" data-tab="diet">Diet</button>
-      <button class="tab" data-tab="progress">Progress</button>
-      <button class="tab premium-btn">AI Coach 🔒</button>
-    </div>
-
-    <div class="content">
-
-      <!-- WORKOUT -->
-      <div class="page active" id="workout">
-        <h2 id="workoutTitle"></h2>
-        <ul id="weeklySplit"></ul>
-
-        <div class="daily-box">
-          <h3>Today's Workout</h3>
-          <ul id="dailyWorkout"></ul>
-        </div>
-      </div>
-
-      <!-- DIET -->
-      <div class="page" id="diet">
-        <h2 id="dietTitle"></h2>
-        <ul id="dietList"></ul>
-      </div>
-
-      <!-- PROGRESS -->
-      <div class="page" id="progress">
-        <h2>Weight Progress</h2>
-        <input type="number" id="newWeight" placeholder="Enter today weight">
-        <button id="saveWeight" class="primary-btn">Save</button>
-        <canvas id="weightChart" height="200"></canvas>
-      </div>
-
-      <!-- TEST PREMIUM BUTTON -->
-      <button id="unlockPremium" class="primary-btn">
-        Simulate Premium Unlock 🔓
-      </button>
-
-    </div>
+  <div class="tabs">
+    <button class="tab active" data-tab="workout">Workout</button>
+    <button class="tab" data-tab="diet">Diet</button>
+    <button class="tab premium-btn">AI Coach 🔒</button>
   </div>
 
-  <!-- PREMIUM POPUP -->
-  <div id="premiumPopup" class="popup hidden">
-    <div class="popup-box">
-      <h3>Upgrade to Premium 🚀</h3>
-      <p>Equipment Workouts • Smart Diet • AI Coach</p>
-      <button class="primary-btn">Upgrade</button>
-      <button class="later" id="closePopup">Later</button>
-    </div>
-  </div>
+  <div class="content">
 
-  <script src="app.js"></script>
+    <!-- WORKOUT PAGE -->
+    <div class="page active" id="workout">
+      <h2>Workouts</h2>
+
+      <h3 class="sub-title">Weekly Workout Split</h3>
+      <ul id="weeklySplit"></ul>
+
+      <div class="premium-note">
+        <h4>💎 Premium Benefits</h4>
+        <ul id="dailySplit"></ul>
+        <p class="note-small">
+          Unlock daily gym workouts with machines and advanced splits.
+        </p>
+      </div>
+    </div>
+
+    <!-- DIET -->
+    <div class="page" id="diet">
+      <h2>Diet</h2>
+      <p>Coming soon…</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- POPUP -->
+<div id="premiumPopup" class="popup hidden">
+  <div class="popup-box">
+    <h3>Upgrade to Premium</h3>
+    <button class="primary-btn" id="unlockPremium">
+      Simulate Premium Unlock
+    </button>
+    <button class="later" id="closePopup">Later</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
