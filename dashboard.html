@@ -7,98 +7,102 @@
 <body>
 
 <div class="container">
-  <h1>Your Weekly Plan 🔥</h1>
-  <p>Smart • Structured • Simple</p>
+  <h1>Your Fitness Plan 🔥</h1>
+  <p>Structured • Balanced • Sustainable</p>
 
-  <!-- WORKOUT WEEKLY PLAN -->
+  <!-- WORKOUT PLAN -->
   <div class="section">
     <h3>🏋️ Weekly Workout Plan</h3>
     <ul id="workoutPlan"></ul>
   </div>
 
-  <!-- DIET TABLE -->
+  <!-- CARDIO -->
+  <div class="section">
+    <h3>❤️ Cardio</h3>
+    <p>2–3 sessions / week (Walking, Cycling, Skipping)</p>
+  </div>
+
+  <!-- DIET -->
   <div class="section">
     <h3>🍽️ Diet Plan</h3>
     <table class="diet-table">
       <tr><th>Meal</th><th>Food</th></tr>
-      <tr><td>Breakfast</td><td id="breakfast"></td></tr>
-      <tr><td>Lunch</td><td id="lunch"></td></tr>
-      <tr><td>Snack</td><td id="snack"></td></tr>
-      <tr><td>Dinner</td><td id="dinner"></td></tr>
+      <tr><td>Breakfast</td><td>Eggs / Paneer + Chapati</td></tr>
+      <tr><td>Lunch</td><td>Rice + Dal / Chicken + Veg</td></tr>
+      <tr><td>Snack</td><td>Banana + Peanuts</td></tr>
+      <tr><td>Dinner</td><td>Chapati + Eggs / Paneer</td></tr>
     </table>
     <p id="macro"></p>
   </div>
 
   <!-- YOGA -->
   <div class="section">
-    <h3>🧘 Recovery</h3>
-    <p>Light stretching & breathing – 10 min</p>
+    <h3>🧘 Recovery & Mobility</h3>
+    <p>Yoga + stretching on rest days (10–15 min)</p>
   </div>
 
   <a href="index.html">⬅ Back to Home</a>
 </div>
 
 <script>
-  const weight = localStorage.getItem("weight");
-  const goal = localStorage.getItem("goal");
-  const workout = localStorage.getItem("workout");
+const weight = localStorage.getItem("weight");
+const goal = localStorage.getItem("goal");
+const workout = localStorage.getItem("workout");
+const level = localStorage.getItem("level");
+const days = localStorage.getItem("days");
 
-  /* ---------- WEEKLY WORKOUT SPLIT ---------- */
-  let workoutHTML = "";
+/* ===== CALORIES ===== */
+let calories = 0;
+let protein = 0;
 
-  if (workout === "home") {
-    workoutHTML = `
-      <li>📅 Monday – Push-ups, Squats</li>
-      <li>📅 Tuesday – Core (Plank, Crunches)</li>
-      <li>📅 Wednesday – Rest / Yoga</li>
-      <li>📅 Thursday – Legs (Squats, Lunges)</li>
-      <li>📅 Friday – Upper Body</li>
-      <li>📅 Saturday – Full Body</li>
-      <li>📅 Sunday – Rest</li>
-    `;
-  }
+if (goal === "gain") { calories = weight * 38; protein = weight * 1.6; }
+if (goal === "muscle") { calories = weight * 33; protein = weight * 2; }
+if (goal === "maintain") { calories = weight * 29; protein = weight * 1.5; }
 
-  if (workout === "gym") {
-    workoutHTML = `
-      <li>📅 Monday – Chest</li>
-      <li>📅 Tuesday – Back</li>
-      <li>📅 Wednesday – Legs</li>
-      <li>📅 Thursday – Shoulders</li>
-      <li>📅 Friday – Arms</li>
-      <li>📅 Saturday – Cardio</li>
-      <li>📅 Sunday – Rest</li>
-    `;
-  }
+document.getElementById("macro").innerHTML =
+  `<b>Calories:</b> ${calories} kcal | <b>Protein:</b> ${protein} g`;
 
-  if (workout === "both") {
-    workoutHTML = `
-      <li>📅 Monday – Home Upper Body</li>
-      <li>📅 Tuesday – Gym Chest</li>
-      <li>📅 Wednesday – Yoga / Recovery</li>
-      <li>📅 Thursday – Gym Legs</li>
-      <li>📅 Friday – Home Core</li>
-      <li>📅 Saturday – Cardio</li>
-      <li>📅 Sunday – Rest</li>
-    `;
-  }
+/* ===== WORKOUT LOGIC ===== */
+let plan = [];
 
-  document.getElementById("workoutPlan").innerHTML = workoutHTML;
+if (workout === "home") {
+  plan = [
+    "Day 1 – Push-ups, Squats",
+    "Day 2 – Core & Abs",
+    "Day 3 – Full Body",
+    "Day 4 – Rest / Yoga",
+    "Day 5 – Legs",
+    "Day 6 – Cardio",
+    "Day 7 – Rest"
+  ];
+}
 
-  /* ---------- DIET LOGIC ---------- */
-  let calories = 0;
-  let protein = 0;
+if (workout === "gym") {
+  plan = [
+    "Day 1 – Chest",
+    "Day 2 – Back",
+    "Day 3 – Legs",
+    "Day 4 – Shoulders",
+    "Day 5 – Arms",
+    "Day 6 – Cardio",
+    "Day 7 – Rest"
+  ];
+}
 
-  if (goal === "gain") { calories = weight * 38; protein = weight * 1.6; }
-  if (goal === "muscle") { calories = weight * 33; protein = weight * 2; }
-  if (goal === "maintain") { calories = weight * 29; protein = weight * 1.5; }
+if (workout === "both") {
+  plan = [
+    "Day 1 – Home Upper Body",
+    "Day 2 – Gym Chest",
+    "Day 3 – Yoga / Mobility",
+    "Day 4 – Gym Legs",
+    "Day 5 – Home Core",
+    "Day 6 – Cardio",
+    "Day 7 – Rest"
+  ];
+}
 
-  document.getElementById("breakfast").innerText = "Eggs / Paneer + Chapati";
-  document.getElementById("lunch").innerText = "Rice + Dal / Chicken + Veg";
-  document.getElementById("snack").innerText = "Banana + Peanuts";
-  document.getElementById("dinner").innerText = "Chapati + Eggs / Paneer";
-
-  document.getElementById("macro").innerHTML =
-    `<b>Calories:</b> ${calories} kcal | <b>Protein:</b> ${protein} g`;
+document.getElementById("workoutPlan").innerHTML =
+  plan.slice(0, days).map(d => `<li>${d}</li>`).join("");
 </script>
 
 </body>
