@@ -6,39 +6,37 @@
 </head>
 <body>
 
-  <h1>NTFYRA</h1>
-  <p>Enter your details to generate your personalized fitness plan</p>
+  <div class="container">
+    <h1>NTFYRA</h1>
+    <p class="subtitle">Smart Fitness System</p>
 
-  <form action="dashboard.html" onsubmit="saveUserData()">
+    <form action="dashboard.html" onsubmit="saveUserData()">
 
-    <!-- WEIGHT -->
-    <label>Weight (kg)</label>
-    <input type="number" id="weight" placeholder="Eg: 60" required>
+      <label>Weight (kg)</label>
+      <input type="number" id="weight" placeholder="Eg: 60" required>
 
-    <!-- HEIGHT -->
-    <label>Height (cm)</label>
-    <input type="number" id="height" placeholder="Eg: 170" required>
+      <label>Height (cm)</label>
+      <input type="number" id="height" placeholder="Eg: 170" required>
 
-    <!-- GOAL -->
-    <label>Your Goal</label>
-    <select id="goal" required>
-      <option value="">-- Select Goal --</option>
-      <option value="gain">Weight Gain</option>
-      <option value="muscle">Muscle Gain</option>
-      <option value="maintain">Maintain / Lean</option>
-    </select>
+      <label>Your Goal</label>
+      <select id="goal" required>
+        <option value="">Select Goal</option>
+        <option value="gain">Weight Gain</option>
+        <option value="muscle">Muscle Gain</option>
+        <option value="maintain">Maintain / Lean</option>
+      </select>
 
-    <!-- WORKOUT TYPE -->
-    <label>Workout Preference</label>
-    <select id="workout" required>
-      <option value="">-- Select Workout Type --</option>
-      <option value="home">Home Workout</option>
-      <option value="gym">Gym Workout</option>
-      <option value="both">Home + Gym</option>
-    </select>
+      <label>Workout Preference</label>
+      <select id="workout" required>
+        <option value="">Select Workout Type</option>
+        <option value="home">Home Workout</option>
+        <option value="gym">Gym Workout</option>
+        <option value="both">Home + Gym</option>
+      </select>
 
-    <button type="submit">Generate My Plan</button>
-  </form>
+      <button type="submit">Generate My Plan</button>
+    </form>
+  </div>
 
   <script>
     function saveUserData() {
