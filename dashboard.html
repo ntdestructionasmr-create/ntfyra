@@ -4,26 +4,70 @@
   <title>NTFYRA Dashboard</title>
 </head>
 <body>
-  <h1>Welcome to NTFYRA</h1>
+
+  <h1>Welcome to NTFYRA 💪</h1>
   <p>Your Smart Fitness System</p>
 
   <hr>
 
-  <h2>Today's Workout</h2>
-  <p>Home Workout – Chest & Arms</p>
+  <h2>Today's Personalized Plan</h2>
 
-  <h2>Today's Diet</h2>
-  <ul>
-    <li>Breakfast: 3 eggs + 2 chapati</li>
-    <li>Lunch: Rice + dal</li>
-    <li>Snack: Banana</li>
-    <li>Dinner: 2 chapati + eggs</li>
-  </ul>
+  <!-- WORKOUT SECTION -->
+  <h3>🏋️ Workout</h3>
+  <p id="workoutPlan"></p>
 
-  <h2>Yoga</h2>
-  <p>5 minutes morning stretching</p>
+  <!-- DIET SECTION -->
+  <h3>🍽️ Diet Plan</h3>
+  <p id="dietPlan"></p>
 
-  <br>
+  <!-- YOGA SECTION -->
+  <h3>🧘 Yoga</h3>
+  <p>5–10 minutes morning stretching</p>
+
+  <hr>
   <a href="index.html">⬅ Back to Home</a>
+
+  <script>
+    const weight = localStorage.getItem("weight");
+    const goal = localStorage.getItem("goal");
+    const workout = localStorage.getItem("workout");
+
+    // WORKOUT LOGIC
+    let workoutText = "";
+    if (workout === "home") workoutText = "Home Workout – Pushups, Squats, Plank";
+    if (workout === "gym") workoutText = "Gym Workout – Chest & Back";
+    if (workout === "both") workoutText = "Home + Gym Mixed Workout";
+
+    document.getElementById("workoutPlan").innerText = workoutText;
+
+    // DIET LOGIC
+    let calories = 0;
+    let protein = 0;
+
+    if (goal === "gain") {
+      calories = weight * 38;
+      protein = weight * 1.6;
+    }
+    if (goal === "muscle") {
+      calories = weight * 33;
+      protein = weight * 2;
+    }
+    if (goal === "maintain") {
+      calories = weight * 29;
+      protein = weight * 1.5;
+    }
+
+    document.getElementById("dietPlan").innerHTML = `
+      Daily Calories: <b>${calories}</b> kcal<br>
+      Protein Target: <b>${protein} g</b><br><br>
+
+      <b>Breakfast:</b> Eggs / Paneer + Chapati<br>
+      <b>Lunch:</b> Rice + Dal / Chicken + Veg<br>
+      <b>Snack:</b> Banana + Peanuts<br>
+      <b>Dinner:</b> Chapati + Eggs / Paneer
+    `;
+  </script>
+
 </body>
 </html>
+
