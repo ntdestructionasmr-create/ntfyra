@@ -23,12 +23,14 @@
 <body>
 
 <script>
-  // PREMIUM STATE
+  // ---- STATE (ONLY THESE) ----
   let isPremium = localStorage.getItem("premium") === "true";
-
-  // EXPERIENCE FLAGS (VERY IMPORTANT)
   let workoutDone = localStorage.getItem("workoutDone") === "true";
   let progressDone = localStorage.getItem("progressDone") === "true";
+
+  function canShowPaywall(){
+    return (!isPremium && workoutDone && progressDone);
+  }
 </script>
 
 <div class="container">
@@ -39,7 +41,7 @@
     <button class="tab active" onclick="openTab('user',this)">User</button>
     <button class="tab" onclick="openTab('workout',this)">Workouts</button>
     <button class="tab" onclick="openTab('progress',this)">Progress</button>
-    <button class="tab" onclick="openPremium('ai',this)">AI Coach 🔒</button>
+    <button class="tab" onclick="onAIClick(this)">AI Coach 🔒</button>
   </div>
 
   <!-- USER -->
@@ -66,9 +68,7 @@
 
   <!-- WORKOUT -->
   <div id="workout" class="section">
-    <div class="box" id="workoutContent">
-      Generate workout from User tab.
-    </div>
+    <div class="box" id="workoutContent">Generate workout first.</div>
   </div>
 
   <!-- PROGRESS -->
@@ -85,7 +85,7 @@
   <!-- AI -->
   <div id="ai" class="section">
     <div class="ai-box" id="aiAdvice">
-      Unlock AI Coach for smart suggestions 🚀
+      Premium AI Coach unlocked 🚀
     </div>
   </div>
 </div>
@@ -102,7 +102,7 @@
 </div>
 
 <script>
-/* ---------- TABS ---------- */
+/* ---------- BASIC TABS ---------- */
 function openTab(id,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
@@ -110,27 +110,23 @@ function openTab(id,btn){
   document.getElementById(id).classList.add('active');
 }
 
-/* ---------- PREMIUM LOGIC (FIXED) ---------- */
-function openPremium(id,btn){
-  // User not ready → no popup
-  if(!workoutDone || !progressDone){
-    alert("Try workouts & add progress first 🙂");
-    return;
-  }
-
-  // User ready → show popup
-  if(!isPremium){
+/* ---------- AI CLICK (ONLY PLACE POPUP CAN OPEN) ---------- */
+function onAIClick(btn){
+  if(canShowPaywall()){
     document.getElementById("premiumModal").classList.remove("hidden");
     return;
   }
-
-  openTab(id,btn);
+  if(!workoutDone || !progressDone){
+    alert("Use workouts & progress first 🙂");
+    return;
+  }
+  openTab('ai',btn);
 }
 
+/* ---------- MODAL ---------- */
 function closePremium(){
   document.getElementById("premiumModal").classList.add("hidden");
 }
-
 function unlockPremium(){
   localStorage.setItem("premium","true");
   isPremium=true;
@@ -146,34 +142,14 @@ function checkWorkout(){
 }
 
 function generateWorkout(){
-  const type=workoutType.value;
-  const level=gymLevel.value;
-
-  // MARK EXPERIENCE
   localStorage.setItem("workoutDone","true");
   workoutDone=true;
 
-  if(type==="gym" && level==="advanced" && !isPremium){
-    workoutContent.innerHTML="🔒 Advanced workouts available in Premium.";
-    return;
-  }
-
-  let plan="";
-  if(type==="home"){
-    plan=`<div class="workout-day">Full Body</div>
-          <div class="workout-day">Cardio</div>
-          <div class="workout-day">Core</div>`;
-  } else {
-    plan= level==="beginner"
-      ? `<div class="workout-day">Chest</div>
-         <div class="workout-day">Back</div>
-         <div class="workout-day">Legs</div>`
-      : `<div class="workout-day">Heavy Chest</div>
-         <div class="workout-day">Heavy Back</div>
-         <div class="workout-day">Heavy Legs</div>`;
-  }
-
-  workoutContent.innerHTML=plan;
+  workoutContent.innerHTML = `
+    <div class="workout-day">Full Body</div>
+    <div class="workout-day">Cardio</div>
+    <div class="workout-day">Core</div>
+  `;
   document.querySelectorAll('.tab')[1].click();
 }
 
@@ -187,43 +163,24 @@ function addProgress(){
   weights.push(w);
   localStorage.setItem("weights",JSON.stringify(weights));
 
-  // MARK EXPERIENCE
   localStorage.setItem("progressDone","true");
   progressDone=true;
 
   todayWeight.value="";
   drawChart();
-  generateAI();
 }
 
 function drawChart(){
   new Chart(weightChart,{
     type:'line',
-    data:{labels:weights.map((_,i)=>`Day ${i+1}`),
-      datasets:[{data:weights,borderColor:'#00c853'}]},
+    data:{
+      labels:weights.map((_,i)=>`Day ${i+1}`),
+      datasets:[{data:weights,borderColor:'#00c853'}]
+    },
     options:{plugins:{legend:{display:false}}}
   });
 }
-
-/* ---------- AI COACH ---------- */
-function generateAI(){
-  if(!isPremium){
-    aiAdvice.innerHTML="Upgrade to Premium to get AI suggestions 🚀";
-    return;
-  }
-  if(weights.length<3){
-    aiAdvice.innerHTML="Add at least 3 entries for analysis.";
-    return;
-  }
-  const diff = weights[weights.length-1]-weights[weights.length-3];
-  aiAdvice.innerHTML =
-    diff>0.5 ? "Great progress 💪"
-    : "Increase calories & intensity.";
-}
-
-drawChart();generateAI();
 </script>
 
 </body>
 </html>
-
