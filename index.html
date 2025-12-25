@@ -2,22 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>NTFYRA – Smart Fitness</title>
+  <title>NTFYRA</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="welcome-bg">
 
-  <!-- HERO -->
-  <div class="welcome-hero">
-    <h1>WELCOME TO <span>NTFYRA</span></h1>
-    <p>Train Smart • Eat Right • Transform Faster</p>
-
-    <button id="startBtn">Get Started</button>
+  <!-- LOADER -->
+  <div id="loader" class="loader">
+    <div class="loader-ring"></div>
   </div>
 
-  <!-- ONBOARD CARD -->
+  <!-- WELCOME -->
+  <div class="welcome-hero hidden" id="welcome">
+    <h1 class="brand-title">NTFYRA</h1>
+    <button id="startBtn" class="primary-btn">Get Started</button>
+  </div>
+
+  <!-- ONBOARD -->
   <div class="onboard-card hidden" id="onboard">
-    <h2>Tell us about you</h2>
+    <h2>Your Fitness Details</h2>
 
     <form id="onboardForm">
       <input type="number" placeholder="Height (cm)" required>
@@ -25,35 +28,51 @@
 
       <select required>
         <option value="">Workout Type</option>
-        <option>Home</option>
-        <option>Gym</option>
+        <option value="home">Home</option>
+        <option value="gym">Gym</option>
       </select>
 
       <select required>
         <option value="">Level</option>
-        <option>Beginner</option>
-        <option>Advanced</option>
+        <option value="beginner">Beginner</option>
+        <option value="advanced">Advanced</option>
       </select>
 
       <select required>
         <option value="">Goal</option>
-        <option>Fat Loss</option>
-        <option>Muscle Gain</option>
-        <option>Lean Body</option>
+        <option value="fatloss">Fat Loss</option>
+        <option value="muscle">Muscle Gain</option>
+        <option value="lean">Lean Body</option>
       </select>
 
-      <button type="submit">Continue →</button>
+      <button type="submit" class="primary-btn">Continue →</button>
     </form>
   </div>
 
   <script>
+    // Loader
+    setTimeout(() => {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("welcome").classList.remove("hidden");
+    }, 1500);
+
+    // Start onboarding
     document.getElementById("startBtn").onclick = () => {
-      document.querySelector(".welcome-hero").style.display = "none";
+      document.getElementById("welcome").style.display = "none";
       document.getElementById("onboard").classList.remove("hidden");
     };
 
+    // Save & move
     document.getElementById("onboardForm").addEventListener("submit", e => {
       e.preventDefault();
+      const f = e.target;
+
+      localStorage.setItem("height", f[0].value);
+      localStorage.setItem("weight", f[1].value);
+      localStorage.setItem("place", f[2].value);
+      localStorage.setItem("level", f[3].value);
+      localStorage.setItem("goal", f[4].value);
+
       window.location.href = "dashboard.html";
     });
   </script>
