@@ -1,58 +1,158 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: transparent;
+}
+
+/* ===== BACKGROUND ===== */
 body {
-  background: #f4f6f9;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.75), rgba(0,0,0,0.9)),
+    url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #e5e7eb;
+}
+
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(4px);
+}
+
+/* ===== ONBOARDING ===== */
+.onboarding {
+  position: relative;
+  z-index: 2;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.container {
-  background: #fff;
-  width: 92%;
-  max-width: 420px;
-  padding: 24px;
+.onboarding h1 span {
+  color: #22c55e;
+}
+
+.form {
+  background: rgba(2,6,23,0.85);
+  padding: 30px;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-p {
-  text-align: center;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-label {
-  font-size: 13px;
-  color: #333;
-}
-
-input, select {
-  width: 100%;
+.form input, .form select {
   padding: 12px;
-  margin: 6px 0 14px;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: none;
+  background: #020617;
+  color: white;
 }
 
-button {
-  width: 100%;
-  padding: 14px;
-  background: #00c853;
-  color: white;
-  font-size: 15px;
+.form button {
+  background: linear-gradient(90deg,#22c55e,#16a34a);
   border: none;
+  padding: 12px;
   border-radius: 12px;
+  font-weight: bold;
   cursor: pointer;
+}
+
+/* ===== DASHBOARD ===== */
+.dashboard {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ===== TABS ===== */
+.tabs {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background: rgba(2,6,23,0.9);
+}
+
+.tabs button {
+  background: #020617;
+  border: none;
+  color: #e5e7eb;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.tabs .active {
+  background: #22c55e;
+  color: black;
+}
+
+.premium-btn {
+  margin-left: auto;
+  background: gold;
+  color: black;
+  font-weight: bold;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  padding: 30px;
+}
+
+.tab {
+  display: none;
+}
+
+.tab.active {
+  display: block;
+}
+
+/* ===== MODAL ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.modal-box {
+  background: linear-gradient(180deg,#020617,#020617cc);
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  width: 300px;
+}
+
+.modal-box .upgrade {
+  background: linear-gradient(90deg,#22c55e,#16a34a);
+  border: none;
+  padding: 10px;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.modal-box .later {
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  margin-top: 10px;
 }
