@@ -14,11 +14,8 @@
   <h2>Today's Personalized Plan</h2>
 
   <!-- WORKOUT -->
-  <h3>🏋️ Workout</h3>
+  <h3>🏋️ Today’s Workout</h3>
   <p id="workoutPlan"></p>
-  <h3>📅 Weekly Workout Plan</h3>
-<ul id="weeklyPlan"></ul>
-
 
   <!-- DIET -->
   <h3>🍽️ Diet Plan</h3>
@@ -29,25 +26,33 @@
   <p>5–10 minutes morning stretching & breathing</p>
 
   <hr>
+
+  <!-- WEEKLY PLAN -->
+  <h3>📅 Weekly Workout Plan</h3>
+  <ul id="weeklyPlan"></ul>
+
+  <hr>
   <a href="index.html">⬅ Back to Home</a>
 
   <script>
+    /* GET USER DATA */
     const weight = Number(localStorage.getItem("weight"));
     const goal = localStorage.getItem("goal");
     const workout = localStorage.getItem("workout");
 
-    /* WORKOUT LOGIC */
+    /* -------- TODAY WORKOUT LOGIC -------- */
     let workoutText = "";
+
     if (workout === "home")
       workoutText = "Home Workout – Pushups, Squats, Plank";
-    if (workout === "gym")
+    else if (workout === "gym")
       workoutText = "Gym Workout – Chest, Back, Legs";
-    if (workout === "both")
+    else
       workoutText = "Mixed Workout – Home + Gym";
 
     document.getElementById("workoutPlan").innerText = workoutText;
 
-    /* DIET LOGIC */
+    /* -------- DIET LOGIC -------- */
     let calories = 0;
     let protein = 0;
 
@@ -65,7 +70,6 @@
     document.getElementById("dietPlan").innerHTML = `
       <p><b>Daily Calories:</b> ${calories} kcal</p>
       <p><b>Protein Target:</b> ${protein} g</p>
-
       <ul>
         <li><b>Breakfast:</b> Eggs / Paneer + Chapati</li>
         <li><b>Lunch:</b> Rice + Dal / Chicken + Vegetables</li>
@@ -73,10 +77,53 @@
         <li><b>Dinner:</b> Chapati + Eggs / Paneer</li>
       </ul>
     `;
+
+    /* -------- WEEKLY WORKOUT PLANNER -------- */
+    const weeklyPlan = document.getElementById("weeklyPlan");
+    let plan = [];
+
+    if (workout === "home") {
+      plan = [
+        "Mon – Chest & Arms (Home)",
+        "Tue – Legs & Core (Home)",
+        "Wed – Rest / Stretching",
+        "Thu – Back & Shoulders (Home)",
+        "Fri – Full Body (Home)",
+        "Sat – Yoga / Cardio",
+        "Sun – Rest"
+      ];
+    } else if (workout === "gym") {
+      plan = [
+        "Mon – Chest & Triceps (Gym)",
+        "Tue – Back & Biceps (Gym)",
+        "Wed – Legs (Gym)",
+        "Thu – Shoulders & Abs",
+        "Fri – Full Body",
+        "Sat – Cardio / Yoga",
+        "Sun – Rest"
+      ];
+    } else {
+      plan = [
+        "Mon – Gym: Chest",
+        "Tue – Home: Legs",
+        "Wed – Rest / Stretching",
+        "Thu – Gym: Back",
+        "Fri – Home: Full Body",
+        "Sat – Yoga / Cardio",
+        "Sun – Rest"
+      ];
+    }
+
+    plan.forEach(day => {
+      const li = document.createElement("li");
+      li.innerText = day;
+      weeklyPlan.appendChild(li);
+    });
   </script>
 
 </body>
 </html>
+
 
 
 
