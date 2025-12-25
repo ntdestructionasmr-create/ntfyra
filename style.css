@@ -1,45 +1,117 @@
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== BACKGROUND ===== */
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  padding: 40px;
+  min-height: 100vh;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h1 {
-  color: #1f3cff;
-}
-
-h2, h3 {
-  color: #333;
-}
-
-p, label {
-  color: #555;
-  font-size: 16px;
-}
-
-form {
-  background: white;
+/* ===== MAIN CARD ===== */
+.container {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
   padding: 25px;
-  max-width: 400px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 25px 45px rgba(0,0,0,0.35);
+  color: #222;
+}
+
+/* ===== HEADINGS ===== */
+h1 {
+  text-align: center;
+  color: #1f3cff;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+h3 {
+  margin: 15px 0 8px;
+}
+
+/* ===== FORM ===== */
+label {
+  font-size: 13px;
+  margin-top: 12px;
+  display: block;
 }
 
 input, select {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
 }
 
+/* ===== BUTTONS ===== */
 button {
-  background: #1f3cff;
-  color: white;
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1f3cff, #5f7cff);
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 button:hover {
-  background: #0d2bdc;
+  transform: scale(1.04);
+}
+
+.pdf-btn {
+  background: linear-gradient(135deg, #00c853, #64dd17);
+}
+
+/* ===== LISTS ===== */
+ul {
+  padding-left: 18px;
+  margin-top: 8px;
+}
+
+li {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  background: #f6f8ff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+/* ===== LINKS ===== */
+a {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  color: #1f3cff;
+  font-weight: bold;
+  text-decoration: none;
 }
