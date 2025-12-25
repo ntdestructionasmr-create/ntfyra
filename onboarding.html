@@ -4,23 +4,44 @@
   <title>NTFYRA – Get My Plan</title>
 </head>
 <body>
-  <h2>Enter Your Details</h2>
 
-  <form action="dashboard.html">
+  <h1>NTFYRA</h1>
+  <p>Enter your details to generate your fitness plan</p>
+
+  <form action="dashboard.html" onsubmit="saveUserData()">
+
     <label>Weight (kg):</label><br>
-    <input type="number"><br><br>
+    <input type="number" id="weight" required><br><br>
 
     <label>Height (cm):</label><br>
-    <input type="number"><br><br>
+    <input type="number" id="height" required><br><br>
 
     <label>Goal:</label><br>
-    <select>
-      <option>Weight Gain</option>
-      <option>Muscle Gain</option>
-      <option>Maintain</option>
+    <select id="goal" required>
+      <option value="gain">Weight Gain</option>
+      <option value="muscle">Muscle Gain</option>
+      <option value="maintain">Maintain</option>
+    </select><br><br>
+
+    <label>Workout Type:</label><br>
+    <select id="workout" required>
+      <option value="home">Home</option>
+      <option value="gym">Gym</option>
+      <option value="both">Both</option>
     </select><br><br>
 
     <button type="submit">Generate My Plan</button>
   </form>
+
+  <script>
+    function saveUserData() {
+      localStorage.setItem("weight", document.getElementById("weight").value);
+      localStorage.setItem("height", document.getElementById("height").value);
+      localStorage.setItem("goal", document.getElementById("goal").value);
+      localStorage.setItem("workout", document.getElementById("workout").value);
+    }
+  </script>
+
 </body>
 </html>
+
