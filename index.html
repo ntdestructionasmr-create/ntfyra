@@ -7,18 +7,13 @@
 </head>
 <body class="welcome-bg">
 
-  <!-- LOADER -->
-  <div id="loader" class="loader">
-    <div class="loader-ring"></div>
-  </div>
-
   <!-- WELCOME -->
-  <div class="welcome-hero hidden" id="welcome">
+  <div class="welcome-hero" id="welcome">
     <h1 class="brand-title">NTFYRA</h1>
     <button id="startBtn" class="primary-btn">Get Started</button>
   </div>
 
-  <!-- ONBOARD -->
+  <!-- ONBOARDING -->
   <div class="onboard-card hidden" id="onboard">
     <h2>Your Fitness Details</h2>
 
@@ -50,20 +45,12 @@
   </div>
 
   <script>
-    // Loader
-    setTimeout(() => {
-      document.getElementById("loader").style.display = "none";
-      document.getElementById("welcome").classList.remove("hidden");
-    }, 1500);
-
-    // Start onboarding
-    document.getElementById("startBtn").onclick = () => {
-      document.getElementById("welcome").style.display = "none";
-      document.getElementById("onboard").classList.remove("hidden");
+    startBtn.onclick = () => {
+      welcome.style.display = "none";
+      onboard.classList.remove("hidden");
     };
 
-    // Save & move
-    document.getElementById("onboardForm").addEventListener("submit", e => {
+    onboardForm.onsubmit = e => {
       e.preventDefault();
       const f = e.target;
 
@@ -73,8 +60,11 @@
       localStorage.setItem("level", f[3].value);
       localStorage.setItem("goal", f[4].value);
 
+      // Default user = FREE
+      localStorage.setItem("premium", "false");
+
       window.location.href = "dashboard.html";
-    });
+    };
   </script>
 
 </body>
