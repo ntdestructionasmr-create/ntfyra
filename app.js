@@ -1,4 +1,4 @@
-// TAB SWITCH
+// TABS
 document.querySelectorAll(".tab").forEach(tab => {
   tab.onclick = () => {
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -16,7 +16,6 @@ const level = localStorage.getItem("level") || "beginner";
 const place = localStorage.getItem("place") || "home";
 
 // WORKOUT
-const workoutList = document.getElementById("workoutList");
 const workouts = {
   beginner: {
     home: ["Push-ups 3×15", "Squats 3×20", "Plank 60s"],
@@ -27,10 +26,10 @@ const workouts = {
     gym: ["Bench Press 4×8", "Deadlift 4×6", "Pull-ups 4×10"]
   }
 };
-
+const workoutList = document.getElementById("workoutList");
 workouts[level][place].forEach(w => {
   const li = document.createElement("li");
-  li.innerText = w;
+  li.textContent = w;
   workoutList.appendChild(li);
 });
 
@@ -44,16 +43,15 @@ const dietList = document.getElementById("dietList");
   `Vegetables – 100 g`
 ].forEach(d => {
   const li = document.createElement("li");
-  li.innerText = d;
+  li.textContent = d;
   dietList.appendChild(li);
 });
 
-// PREMIUM POPUP (ONLY ON CLICK)
+// PREMIUM POPUP
 const popup = document.getElementById("premiumPopup");
 document.querySelectorAll(".premium-btn").forEach(btn => {
   btn.onclick = () => popup.classList.remove("hidden");
 });
-
 document.getElementById("closePopup").onclick = () => {
   popup.classList.add("hidden");
 };
