@@ -1,3 +1,96 @@
-<a href="setup.html">
-  <button>Get My Plan</button>
-</a>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+
+<h2>Your Fitness Plan</h2>
+
+<!-- WORKOUT -->
+<h3>Workout Plan</h3>
+<ul id="workoutPlan"></ul>
+
+<!-- DIET -->
+<h3>Diet Plan</h3>
+<p id="dietPlan"></p>
+
+<script>
+/* ===== GET USER DATA ===== */
+const height = parseFloat(localStorage.getItem("height"));
+const weight = parseFloat(localStorage.getItem("weight"));
+const goal = localStorage.getItem("goal");
+const workout = localStorage.getItem("workout");
+const level = localStorage.getItem("level");
+
+/* ===== DIET CALCULATION ===== */
+const heightM = height / 100;
+const bmi = (weight / (heightM * heightM)).toFixed(1);
+
+let calories = weight * 22;
+if(goal === "gain") calories += 500;
+if(goal === "muscle") calories += 300;
+
+let protein = 0;
+if(goal === "gain") protein = (weight * 1.6).toFixed(0);
+if(goal === "muscle") protein = (weight * 2).toFixed(0);
+if(goal === "maintain") protein = (weight * 1.5).toFixed(0);
+
+document.getElementById("dietPlan").innerHTML = `
+<b>BMI:</b> ${bmi}<br>
+<b>Calories:</b> ${calories} kcal<br>
+<b>Protein:</b> ${protein} g<br><br>
+
+<b>Breakfast:</b> Eggs / Paneer + Chapati<br>
+<b>Lunch:</b> Rice + Dal / Chicken<br>
+<b>Snack:</b> Banana + Peanuts<br>
+<b>Dinner:</b> Chapati + Eggs / Paneer
+`;
+
+/* ===== WORKOUT LOGIC ===== */
+let workouts = [];
+
+if(workout === "gym"){
+  if(level === "beginner"){
+    workouts = [
+      "Chest – Machine Bench Press",
+      "Chest – Dumbbell Press",
+      "Back – Lat Pulldown",
+      "Legs – Leg Press",
+      "Arms – Cable Pushdown"
+    ];
+  } else {
+    workouts = [
+      "Chest – Barbell Bench Press",
+      "Back – Pull-ups / Barbell Row",
+      "Legs – Squats",
+      "Shoulders – Overhead Press",
+      "Arms – Barbell Curls & Dips"
+    ];
+  }
+}
+
+if(workout === "home"){
+  if(level === "beginner"){
+    workouts = [
+      "Push-ups",
+      "Squats",
+      "Plank",
+      "Walking"
+    ];
+  } else {
+    workouts = [
+      "Decline Push-ups",
+      "Jump Squats",
+      "Plank Variations",
+      "HIIT"
+    ];
+  }
+}
+
+document.getElementById("workoutPlan").innerHTML =
+  workouts.map(w => `<li>${w}</li>`).join("");
+</script>
+
+</body>
+</html>
