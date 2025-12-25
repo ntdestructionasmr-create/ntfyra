@@ -68,3 +68,6 @@ document.querySelectorAll(".premium-btn").forEach(btn => {
 document.getElementById("closePopup").addEventListener("click", () => {
   popup.classList.add("hidden");
 });
+.hidden {
+  display: none !important;
+}
