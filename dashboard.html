@@ -3,61 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>NTFYRA Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body class="gym-bg">
 
-  <!-- DARK OVERLAY -->
   <div class="overlay"></div>
 
-  <!-- APP -->
   <div class="app">
 
-    <!-- TOP NAV TABS -->
-    <div class="top-tabs">
+    <!-- TOP TABS -->
+    <div class="tabs">
       <button class="tab active" data-tab="home">Dashboard</button>
       <button class="tab" data-tab="workout">Workout</button>
       <button class="tab" data-tab="diet">Diet</button>
       <button class="tab premium-btn">AI Coach 🔒</button>
     </div>
 
-    <!-- CONTENT AREA -->
+    <!-- CONTENT -->
     <div class="content">
 
-      <!-- DASHBOARD -->
       <div class="page active" id="home">
-        <h2>Welcome back 💪</h2>
-        <p>Your fitness journey starts today.</p>
-
-        <div class="card">
-          <h3>Today’s Focus</h3>
-          <p>Full Body – Beginner</p>
-        </div>
+        <h2>Welcome Back 💪</h2>
+        <p>Your personalized fitness plan is ready.</p>
       </div>
 
-      <!-- WORKOUT -->
       <div class="page" id="workout">
         <h2>Workout Plan</h2>
-        <ul>
-          <li>Push-ups – 3 × 15</li>
-          <li>Squats – 3 × 20</li>
-          <li>Plank – 60 sec</li>
-        </ul>
-
+        <ul id="workoutList"></ul>
         <button class="premium-btn">Advanced Split 🔒</button>
       </div>
 
-      <!-- DIET -->
       <div class="page" id="diet">
-        <h2>Diet Plan (Sample)</h2>
-        <ul>
-          <li>Oats – 80 g</li>
-          <li>Eggs – 4</li>
-          <li>Rice – 150 g</li>
-          <li>Chicken – 200 g</li>
-          <li>Vegetables – 100 g</li>
-        </ul>
+        <h2>Diet Plan (Grams)</h2>
+        <ul id="dietList"></ul>
       </div>
 
     </div>
@@ -66,7 +44,7 @@
   <!-- PREMIUM POPUP -->
   <div id="premiumPopup" class="popup hidden">
     <div class="popup-box">
-      <h3>Upgrade to Premium 🚀</h3>
+      <h3>Premium Membership 🚀</h3>
       <p>AI Coach • Advanced Workouts • Smart Diet</p>
       <h2>₹99 / month</h2>
 
@@ -75,6 +53,6 @@
     </div>
   </div>
 
-  <script src="dashboard.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
