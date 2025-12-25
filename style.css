@@ -66,7 +66,9 @@ input, select {
 .page { display: none; }
 .page.active { display: block; }
 
-#weeklySplit li {
+#weeklySplit li,
+#basicDiet li,
+#premiumDiet li {
   list-style: none;
   padding: 8px;
   margin-bottom: 6px;
@@ -74,15 +76,15 @@ input, select {
   border-radius: 10px;
 }
 
+.sub-title {
+  margin: 10px 0 6px;
+}
+
 .premium-note {
   margin-top: 20px;
   padding: 14px;
   border: 1px dashed gold;
   border-radius: 14px;
-}
-
-.premium-note li {
-  font-size: 14px;
 }
 
 .note-small {
