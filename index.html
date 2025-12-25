@@ -1,39 +1,62 @@
-const panes=[...document.querySelectorAll('.step-pane')];
-const stepNo=document.getElementById('stepNo');
-const nextBtn=document.getElementById('nextBtn');
-const backBtn=document.getElementById('backBtn');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NTFYRA – Smart Fitness</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="welcome-bg">
 
-let i=0;
-const data={};
+  <!-- HERO -->
+  <div class="welcome-hero">
+    <h1>WELCOME TO <span>NTFYRA</span></h1>
+    <p>Train Smart • Eat Right • Transform Faster</p>
 
-function show(){
-  panes.forEach(p=>p.classList.remove('active'));
-  panes[i].classList.add('active');
-  stepNo.textContent=i+1;
-  backBtn.style.visibility=i===0?'hidden':'visible';
-  nextBtn.textContent = i===panes.length-1 ? 'Finish' : 'Continue';
-}
-show();
+    <button id="startBtn">Get Started</button>
+  </div>
 
-document.querySelectorAll('.choices button').forEach(b=>{
-  b.onclick=()=>{
-    b.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    Object.assign(data, b.dataset);
-  }
-});
+  <!-- ONBOARD CARD -->
+  <div class="onboard-card hidden" id="onboard">
+    <h2>Tell us about you</h2>
 
-nextBtn.onclick=()=>{
-  if(i===0){
-    data.height=document.getElementById('height').value;
-    data.weight=document.getElementById('weight').value;
-    if(!data.height||!data.weight){alert('Enter height & weight');return;}
-  }
-  if(i<panes.length-1){ i++; show(); }
-  else{
-    localStorage.setItem('ntfyra_onboard', JSON.stringify(data));
-    window.location.href='dashboard.html'; // create later
-  }
-};
+    <form id="onboardForm">
+      <input type="number" placeholder="Height (cm)" required>
+      <input type="number" placeholder="Weight (kg)" required>
 
-backBtn.onclick=()=>{ if(i>0){ i--; show(); } };
+      <select required>
+        <option value="">Workout Type</option>
+        <option>Home</option>
+        <option>Gym</option>
+      </select>
+
+      <select required>
+        <option value="">Level</option>
+        <option>Beginner</option>
+        <option>Advanced</option>
+      </select>
+
+      <select required>
+        <option value="">Goal</option>
+        <option>Fat Loss</option>
+        <option>Muscle Gain</option>
+        <option>Lean Body</option>
+      </select>
+
+      <button type="submit">Continue →</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("startBtn").onclick = () => {
+      document.querySelector(".welcome-hero").style.display = "none";
+      document.getElementById("onboard").classList.remove("hidden");
+    };
+
+    document.getElementById("onboardForm").addEventListener("submit", e => {
+      e.preventDefault();
+      window.location.href = "dashboard.html";
+    });
+  </script>
+
+</body>
+</html>
