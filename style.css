@@ -1,158 +1,78 @@
-* {
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: transparent;
-}
-
-/* ===== BACKGROUND ===== */
-body {
+/* BACKGROUND */
+.welcome-bg {
+  min-height: 100vh;
   background:
-    linear-gradient(180deg, rgba(0,0,0,0.75), rgba(0,0,0,0.9)),
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
     url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
-  color: #e5e7eb;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.bg-overlay {
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(4px);
+/* HERO */
+.welcome-hero {
+  text-align: center;
+  padding-top: 140px;
 }
 
-/* ===== ONBOARDING ===== */
-.onboarding {
-  position: relative;
-  z-index: 2;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.welcome-hero h1 {
+  font-size: 52px;
+  letter-spacing: 2px;
 }
 
-.onboarding h1 span {
-  color: #22c55e;
+.welcome-hero span {
+  color: #00ff88;
 }
 
-.form {
-  background: rgba(2,6,23,0.85);
-  padding: 30px;
-  border-radius: 16px;
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.welcome-hero p {
+  font-size: 18px;
+  margin-top: 10px;
+  opacity: 0.9;
 }
 
-.form input, .form select {
-  padding: 12px;
+.welcome-hero button {
+  margin-top: 30px;
+  padding: 14px 36px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  background: #00ff88;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ONBOARD CARD */
+.onboard-card {
+  width: 340px;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(10px);
+  padding: 28px;
+  border-radius: 18px;
+  margin: auto;
+  margin-top: 80px;
+  box-shadow: 0 0 40px rgba(0,255,136,0.2);
+}
+
+.onboard-card h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 11px;
+  margin-top: 12px;
   border-radius: 10px;
   border: none;
-  background: #020617;
-  color: white;
 }
 
-.form button {
-  background: linear-gradient(90deg,#22c55e,#16a34a);
-  border: none;
-  padding: 12px;
-  border-radius: 12px;
+button {
+  background: #00ff88;
   font-weight: bold;
-  cursor: pointer;
-}
-
-/* ===== DASHBOARD ===== */
-.dashboard {
-  position: relative;
-  z-index: 2;
-  min-height: 100vh;
 }
 
 .hidden {
   display: none;
-}
-
-/* ===== TABS ===== */
-.tabs {
-  display: flex;
-  gap: 10px;
-  padding: 15px;
-  background: rgba(2,6,23,0.9);
-}
-
-.tabs button {
-  background: #020617;
-  border: none;
-  color: #e5e7eb;
-  padding: 10px 16px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.tabs .active {
-  background: #22c55e;
-  color: black;
-}
-
-.premium-btn {
-  margin-left: auto;
-  background: gold;
-  color: black;
-  font-weight: bold;
-}
-
-/* ===== CONTENT ===== */
-.content {
-  padding: 30px;
-}
-
-.tab {
-  display: none;
-}
-
-.tab.active {
-  display: block;
-}
-
-/* ===== MODAL ===== */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99;
-}
-
-.modal-box {
-  background: linear-gradient(180deg,#020617,#020617cc);
-  padding: 30px;
-  border-radius: 16px;
-  text-align: center;
-  width: 300px;
-}
-
-.modal-box .upgrade {
-  background: linear-gradient(90deg,#22c55e,#16a34a);
-  border: none;
-  padding: 10px;
-  width: 100%;
-  margin-top: 10px;
-  border-radius: 10px;
-}
-
-.modal-box .later {
-  background: transparent;
-  color: #94a3b8;
-  border: none;
-  margin-top: 10px;
 }
