@@ -1,96 +1,114 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard</title>
+  <title>NTFYRA Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Your Fitness Plan</h2>
+  <div class="container">
+    <h1>Your Fitness Plan</h1>
+    <p>Personalized for you</p>
 
-<!-- WORKOUT -->
-<h3>Workout Plan</h3>
-<ul id="workoutPlan"></ul>
+    <!-- WORKOUT -->
+    <div class="section">
+      <h3>🏋️ Workout Plan</h3>
+      <div id="workoutPlan"></div>
+    </div>
 
-<!-- DIET -->
-<h3>Diet Plan</h3>
-<p id="dietPlan"></p>
+    <!-- DIET -->
+    <div class="section">
+      <h3>🍽️ Diet Plan (with quantity)</h3>
+      <div id="dietPlan"></div>
+    </div>
 
-<script>
-/* ===== GET USER DATA ===== */
-const height = parseFloat(localStorage.getItem("height"));
-const weight = parseFloat(localStorage.getItem("weight"));
-const goal = localStorage.getItem("goal");
-const workout = localStorage.getItem("workout");
-const level = localStorage.getItem("level");
+    <a href="index.html">⬅ Back</a>
+  </div>
 
-/* ===== DIET CALCULATION ===== */
-const heightM = height / 100;
-const bmi = (weight / (heightM * heightM)).toFixed(1);
+  <script>
+    const weight = Number(localStorage.getItem("weight"));
+    const workoutType = localStorage.getItem("workoutType");
+    const level = localStorage.getItem("level");
 
-let calories = weight * 22;
-if(goal === "gain") calories += 500;
-if(goal === "muscle") calories += 300;
+    /* ---------------- WORKOUT LOGIC ---------------- */
+    let workoutHTML = "";
 
-let protein = 0;
-if(goal === "gain") protein = (weight * 1.6).toFixed(0);
-if(goal === "muscle") protein = (weight * 2).toFixed(0);
-if(goal === "maintain") protein = (weight * 1.5).toFixed(0);
+    if (level === "beginner") {
+      workoutHTML = workoutType === "home"
+        ? `
+          <b>Beginner – Full Body (Home)</b><br>
+          Push-ups – 3 × 8<br>
+          Squats – 3 × 10<br>
+          Plank – 3 × 20 sec<br>
+          Jumping Jacks – 3 × 20<br>
+          <i>4 days / week</i>
+        `
+        : `
+          <b>Beginner – Full Body (Gym)</b><br>
+          Bench Press – 3 × 8<br>
+          Lat Pulldown – 3 × 10<br>
+          Leg Press – 3 × 10<br>
+          Shoulder Press – 3 × 8<br>
+          <i>4 days / week</i>
+        `;
+    }
 
-document.getElementById("dietPlan").innerHTML = `
-<b>BMI:</b> ${bmi}<br>
-<b>Calories:</b> ${calories} kcal<br>
-<b>Protein:</b> ${protein} g<br><br>
+    if (level === "advanced") {
+      workoutHTML = workoutType === "home"
+        ? `
+          <b>Advanced – Upper / Lower (Home)</b><br><br>
+          <b>Day 1: Upper</b><br>
+          Push-ups – 4 × 12<br>
+          Pike Push-ups – 4 × 10<br>
+          Plank – 3 × 45 sec<br><br>
+          <b>Day 2: Lower</b><br>
+          Squats – 4 × 15<br>
+          Lunges – 3 × 12<br>
+          Wall Sit – 3 × 40 sec<br>
+          <i>5–6 days / week</i>
+        `
+        : `
+          <b>Advanced – Upper / Lower (Gym)</b><br><br>
+          <b>Day 1: Upper</b><br>
+          Bench Press – 4 × 8<br>
+          Pull-ups – 4 × 8<br>
+          Shoulder Press – 3 × 10<br>
+          Biceps Curl – 3 × 12<br><br>
+          <b>Day 2: Lower</b><br>
+          Squats – 4 × 6<br>
+          Romanian Deadlift – 3 × 8<br>
+          Leg Curl – 3 × 12<br>
+          <i>5–6 days / week</i>
+        `;
+    }
 
-<b>Breakfast:</b> Eggs / Paneer + Chapati<br>
-<b>Lunch:</b> Rice + Dal / Chicken<br>
-<b>Snack:</b> Banana + Peanuts<br>
-<b>Dinner:</b> Chapati + Eggs / Paneer
-`;
+    document.getElementById("workoutPlan").innerHTML = workoutHTML;
 
-/* ===== WORKOUT LOGIC ===== */
-let workouts = [];
+    /* ---------------- DIET LOGIC ---------------- */
+    let calories = level === "advanced" ? weight * 33 : weight * 30;
+    let protein = level === "advanced" ? weight * 2 : weight * 1.6;
 
-if(workout === "gym"){
-  if(level === "beginner"){
-    workouts = [
-      "Chest – Machine Bench Press",
-      "Chest – Dumbbell Press",
-      "Back – Lat Pulldown",
-      "Legs – Leg Press",
-      "Arms – Cable Pushdown"
-    ];
-  } else {
-    workouts = [
-      "Chest – Barbell Bench Press",
-      "Back – Pull-ups / Barbell Row",
-      "Legs – Squats",
-      "Shoulders – Overhead Press",
-      "Arms – Barbell Curls & Dips"
-    ];
-  }
-}
+    document.getElementById("dietPlan").innerHTML = `
+      <b>Calories:</b> ${calories} kcal<br>
+      <b>Protein:</b> ${protein} g<br><br>
 
-if(workout === "home"){
-  if(level === "beginner"){
-    workouts = [
-      "Push-ups",
-      "Squats",
-      "Plank",
-      "Walking"
-    ];
-  } else {
-    workouts = [
-      "Decline Push-ups",
-      "Jump Squats",
-      "Plank Variations",
-      "HIIT"
-    ];
-  }
-}
+      <b>Breakfast</b><br>
+      Eggs – ${level === "advanced" ? 4 : 3} (~${level === "advanced" ? 240 : 180} g)<br>
+      Oats – ${level === "advanced" ? 70 : 50} g<br><br>
 
-document.getElementById("workoutPlan").innerHTML =
-  workouts.map(w => `<li>${w}</li>`).join("");
-</script>
+      <b>Lunch</b><br>
+      Rice – ${level === "advanced" ? 180 : 150} g<br>
+      Chicken – ${level === "advanced" ? 180 : 150} g / Paneer – ${level === "advanced" ? 140 : 120} g<br><br>
+
+      <b>Snack</b><br>
+      Banana – 120 g<br>
+      Peanuts – 30 g<br><br>
+
+      <b>Dinner</b><br>
+      Chapati – ${level === "advanced" ? 3 : 2} (≈ ${level === "advanced" ? 120 : 80} g flour)<br>
+      Eggs – ${level === "advanced" ? 3 : 2}
+    `;
+  </script>
 
 </body>
 </html>
