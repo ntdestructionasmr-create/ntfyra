@@ -2,33 +2,34 @@
 <html>
 <head>
   <title>NTFYRA – Get My Plan</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <h1>NTFYRA</h1>
-  <p>Enter your details to generate your fitness plan</p>
+  <p>Enter your details to generate your smart fitness plan</p>
 
   <form action="dashboard.html" onsubmit="saveUserData()">
 
-    <label>Weight (kg):</label><br>
-    <input type="number" id="weight" required><br><br>
+    <label>Weight (kg)</label>
+    <input type="number" id="weight" required>
 
-    <label>Height (cm):</label><br>
-    <input type="number" id="height" required><br><br>
+    <label>Height (cm)</label>
+    <input type="number" id="height" required>
 
-    <label>Goal:</label><br>
+    <label>Goal</label>
     <select id="goal" required>
       <option value="gain">Weight Gain</option>
       <option value="muscle">Muscle Gain</option>
       <option value="maintain">Maintain</option>
-    </select><br><br>
+    </select>
 
-    <label>Workout Type:</label><br>
+    <label>Workout Type</label>
     <select id="workout" required>
       <option value="home">Home</option>
       <option value="gym">Gym</option>
-      <option value="both">Both</option>
-    </select><br><br>
+      <option value="both">Home + Gym</option>
+    </select>
 
     <button type="submit">Generate My Plan</button>
   </form>
@@ -44,4 +45,5 @@
 
 </body>
 </html>
+
 
