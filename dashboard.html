@@ -1,73 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NTFYRA Dashboard</title>
+  <title>NTFYRA – Get My Plan</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Welcome to NTFYRA 💪</h1>
-  <p>Your Smart Fitness System</p>
+  <h1>NTFYRA</h1>
+  <p>Enter your details to generate your smart fitness plan</p>
 
-  <hr>
+  <form action="dashboard.html" onsubmit="saveUserData()">
 
-  <h2>Today's Personalized Plan</h2>
+    <label>Weight (kg)</label>
+    <input type="number" id="weight" required>
 
-  <!-- WORKOUT SECTION -->
-  <h3>🏋️ Workout</h3>
-  <p id="workoutPlan"></p>
+    <label>Height (cm)</label>
+    <input type="number" id="height" required>
 
-  <!-- DIET SECTION -->
-  <h3>🍽️ Diet Plan</h3>
-  <p id="dietPlan"></p>
+    <label>Goal</label>
+    <select id="goal" required>
+      <option value="gain">Weight Gain</option>
+      <option value="muscle">Muscle Gain</option>
+      <option value="maintain">Maintain</option>
+    </select>
 
-  <!-- YOGA SECTION -->
-  <h3>🧘 Yoga</h3>
-  <p>5–10 minutes morning stretching</p>
+    <label>Workout Type</label>
+    <select id="workout" required>
+      <option value="home">Home</option>
+      <option value="gym">Gym</option>
+      <option value="both">Home + Gym</option>
+    </select>
 
-  <hr>
-  <a href="index.html">⬅ Back to Home</a>
+    <button type="submit">Generate My Plan</button>
+  </form>
 
   <script>
-    const weight = localStorage.getItem("weight");
-    const goal = localStorage.getItem("goal");
-    const workout = localStorage.getItem("workout");
-
-    // WORKOUT LOGIC
-    let workoutText = "";
-    if (workout === "home") workoutText = "Home Workout – Pushups, Squats, Plank";
-    if (workout === "gym") workoutText = "Gym Workout – Chest & Back";
-    if (workout === "both") workoutText = "Home + Gym Mixed Workout";
-
-    document.getElementById("workoutPlan").innerText = workoutText;
-
-    // DIET LOGIC
-    let calories = 0;
-    let protein = 0;
-
-    if (goal === "gain") {
-      calories = weight * 38;
-      protein = weight * 1.6;
+    function saveUserData() {
+      localStorage.setItem("weight", document.getElementById("weight").value);
+      localStorage.setItem("height", document.getElementById("height").value);
+      localStorage.setItem("goal", document.getElementById("goal").value);
+      localStorage.setItem("workout", document.getElementById("workout").value);
     }
-    if (goal === "muscle") {
-      calories = weight * 33;
-      protein = weight * 2;
-    }
-    if (goal === "maintain") {
-      calories = weight * 29;
-      protein = weight * 1.5;
-    }
-
-    document.getElementById("dietPlan").innerHTML = `
-      Daily Calories: <b>${calories}</b> kcal<br>
-      Protein Target: <b>${protein} g</b><br><br>
-
-      <b>Breakfast:</b> Eggs / Paneer + Chapati<br>
-      <b>Lunch:</b> Rice + Dal / Chicken + Veg<br>
-      <b>Snack:</b> Banana + Peanuts<br>
-      <b>Dinner:</b> Chapati + Eggs / Paneer
-    `;
   </script>
 
 </body>
 </html>
+
 
